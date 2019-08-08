@@ -1,4 +1,5 @@
 using System.Collections;
+using Domain;
 using NUnit.Framework;
 
 namespace Tests
@@ -14,14 +15,5 @@ namespace Tests
             
             CollectionAssert.IsEmpty(backlogItems);
         }
-    }
-
-    public class Backlog
-    {
-        public BacklogItem[] Items => new BacklogItem[0];
-    }
-
-    public class BacklogItem
-    {
     }
 }
