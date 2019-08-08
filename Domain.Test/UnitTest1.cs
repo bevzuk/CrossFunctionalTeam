@@ -1,0 +1,27 @@
+using System.Collections;
+using NUnit.Framework;
+
+namespace Tests
+{
+    public class BacklogTests
+    {
+        [Test]
+        public void ByDefault_BacklogIsEmpty()
+        {
+            var backlog = new Backlog();
+            
+            var backlogItems = backlog.Items;
+            
+            CollectionAssert.IsEmpty(backlogItems);
+        }
+    }
+
+    public class Backlog
+    {
+        public BacklogItem[] Items => new BacklogItem[0];
+    }
+
+    public class BacklogItem
+    {
+    }
+}
