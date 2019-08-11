@@ -41,5 +41,21 @@ namespace Tests
             Assert.AreEqual(0, statistics.LeadTime);
             Assert.AreEqual(0, statistics.ThroughputRate);
         }
+
+        [Test]
+        public void CanWorkOnSingleBacklogItem()
+        {
+            var team = new Team();
+            var programmer = new Programmer();
+            programmer.Learn(new Skill("A"));
+            team.Add(programmer);
+            var backlog = new Backlog();
+            backlog.Add(new BacklogItem("US1", new Component("A")));
+            
+            team.WorkOn(backlog);
+            
+            var statistics = team.Statistics;
+            Assert.AreEqual(1, statistics.ThroughputRate);
+        }
     }
 }

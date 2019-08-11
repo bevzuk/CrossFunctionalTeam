@@ -12,6 +12,11 @@ namespace Domain
         }
 
         public IReadOnlyCollection<Programmer> Members => members.AsReadOnly();
-        public Statistics Statistics => new Statistics();
+        public Statistics Statistics = new Statistics();
+
+        public void WorkOn(Backlog backlog)
+        {
+            Statistics.Update();
+        }
     }
 }
