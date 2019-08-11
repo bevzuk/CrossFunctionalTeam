@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Domain
@@ -5,21 +6,28 @@ namespace Domain
     public class BacklogItem
     {
         public readonly string Name;
-        private readonly Component[] _components;
+        private readonly List<Component> components;
 
         public BacklogItem(string name, params Component[] components)
         {
             Name = name;
-            _components = components;
+            this.components = new List<Component>(components);
         }
 
-        public string Components => _components.Select(_ => _.Name).Aggregate(string.Empty, string.Concat);
+        public IReadOnlyCollection<Component> Components => components.AsReadOnly();
 
         #region Equality members
 
         protected bool Equals(BacklogItem other)
         {
-            return Name == other.Name && Equals(_components, other._components);
+            var collectionsAreEqual = true;
+            if (components.Count != other.components.Count) return false;
+            for (var i = 0; i < components.Count; i++)
+            {
+                if (!components[i].Equals(other.components[i])) collectionsAreEqual = false;
+            }
+            
+            return Name == other.Name && collectionsAreEqual;
         }
 
         public override bool Equals(object obj)
@@ -34,7 +42,7 @@ namespace Domain
         {
             unchecked
             {
-                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (_components != null ? _components.GetHashCode() : 0);
+                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (components != null ? components.GetHashCode() : 0);
             }
         }
 

@@ -62,8 +62,7 @@ namespace Tests
         public void CanWorkOnBacklogWithTwoItems()
         {
             var team = new Team();
-            var programmer = new Programmer();
-            programmer.Learn(new Skill("A"));
+            var programmer = CreateProgrammerWithSkill("A");
             team.Add(programmer);
             var backlog = new Backlog();
             backlog.Add(new BacklogItem("US1", new Component("A")));
@@ -73,6 +72,31 @@ namespace Tests
             
             var statistics = team.Statistics;
             Assert.AreEqual(2, statistics.ThroughputRate);
+        }
+
+        [Test]
+        public void TeamCanDistrubuteWorkAcrossProgrammersForDay()
+        {
+            var team = new Team();
+            var programmerA = CreateProgrammerWithSkill("A");
+            var programmerB = CreateProgrammerWithSkill("B");
+            team.Add(programmerA, programmerB);
+            var backlog = new Backlog();
+            var componentA = new Component("A");
+            var componentB = new Component("B");
+            backlog.Add(new BacklogItem("US1", componentA, componentB));
+
+            team.DistributeWork(backlog);
+            
+            Assert.AreEqual(componentA, programmerA.WorkingOn);
+            Assert.AreEqual(componentB, programmerB.WorkingOn);
+        }
+
+        private static Programmer CreateProgrammerWithSkill(string skill)
+        {
+            var programmer = new Programmer();
+            programmer.Learn(new Skill(skill));
+            return programmer;
         }
     }
 }

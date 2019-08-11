@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain
 {
@@ -19,6 +20,20 @@ namespace Domain
             foreach (var backlogItem in backlog.Items)
             {
                 Statistics.Update();
+            }
+        }
+
+        public void DistributeWork(Backlog backlog)
+        {
+            var backlogItem = backlog.Items.First();
+            foreach (var programmer in Members)
+            {
+                var components = backlogItem.Components;
+                var appropriateComponent = components.FirstOrDefault(_ => _.Name == programmer.Skill.Name);
+                if (appropriateComponent != null)
+                {
+                    programmer.WorkOn(appropriateComponent);
+                }
             }
         }
     }

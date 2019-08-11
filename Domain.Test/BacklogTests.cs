@@ -53,7 +53,7 @@ namespace Tests
 
             var backlogItem = backlog.Items.Single();
 
-            Assert.AreEqual("A", backlogItem.Components);
+            Assert.AreEqual(new Component("A"), backlogItem.Components.Single());
         }
 
         [Test]
@@ -67,7 +67,8 @@ namespace Tests
 
             var backlogItem = backlog.Items.Single();
 
-            Assert.AreEqual("AB", backlogItem.Components);
+            Assert.AreEqual(new Component("A"), backlogItem.Components.First());
+            Assert.AreEqual(new Component("B"), backlogItem.Components.ElementAt(1));
         }
     }
 }
