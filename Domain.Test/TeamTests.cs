@@ -24,8 +24,8 @@ namespace Tests
             var team = new Team();
             var programmer1 = new Programmer();
             var programmer2 = new Programmer();
-            team.Add(programmer1);
-            team.Add(programmer2);
+
+            team.Add(programmer1, programmer2);
 
             var teamMembers = team.Members;
             CollectionAssert.AreEquivalent(new [] {programmer1, programmer2}, teamMembers);

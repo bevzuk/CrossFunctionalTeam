@@ -6,9 +6,9 @@ namespace Domain
     {
         private readonly List<Programmer> members = new List<Programmer>();
         
-        public void Add(Programmer programmer)
+        public void Add(params Programmer[] programmers)
         {
-            members.Add(programmer);
+            members.AddRange(programmers);
         }
 
         public IReadOnlyCollection<Programmer> Members => members.AsReadOnly();
