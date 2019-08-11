@@ -4,9 +4,9 @@ namespace Domain
     {
         public void Learn(string skill)
         {
-            
+            Skill = skill;
         }
 
-        public string Skills => "A";
+        public string Skill { get; private set; }
     }
 }
