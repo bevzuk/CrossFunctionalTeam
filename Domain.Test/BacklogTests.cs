@@ -15,16 +15,30 @@ namespace Tests
 
             CollectionAssert.IsEmpty(backlogItems);
         }
-        
+
         [Test]
         public void CanAddUserStory()
         {
             var backlog = new Backlog();
             backlog.Add(new BacklogItem("US1"));
-            
+
             var backlogItem = backlog.Items.Single();
-            
+
             Assert.AreEqual("US1", backlogItem.Name);
+        }
+
+        [Test]
+        public void CanAddTwoUserStories()
+        {
+            var backlog = new Backlog();
+            backlog.Add(new BacklogItem("US1"));
+            backlog.Add(new BacklogItem("US2"));
+
+            var backlogItems = backlog.Items;
+
+            CollectionAssert.AreEqual(
+                new[] {new BacklogItem("US1"), new BacklogItem("US2")},
+                backlogItems);
         }
 
         [Test]
@@ -34,9 +48,9 @@ namespace Tests
             var component = new Component("A");
             var item = new BacklogItem("US1", component);
             backlog.Add(item);
-            
+
             var backlogItem = backlog.Items.Single();
-            
+
             Assert.AreEqual("A", backlogItem.Components);
         }
 
@@ -48,9 +62,9 @@ namespace Tests
             var componentB = new Component("B");
             var item = new BacklogItem("US1", componentA, componentB);
             backlog.Add(item);
-            
+
             var backlogItem = backlog.Items.Single();
-            
+
             Assert.AreEqual("AB", backlogItem.Components);
         }
     }
