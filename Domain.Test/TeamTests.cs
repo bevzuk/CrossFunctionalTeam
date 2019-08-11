@@ -1,6 +1,7 @@
 using System.Collections;
 using Domain;
 using NUnit.Framework;
+using Tests.DSL;
 
 namespace Tests
 {
@@ -62,7 +63,7 @@ namespace Tests
         public void CanWorkOnBacklogWithTwoItems()
         {
             var team = new Team();
-            var programmer = CreateProgrammerWithSkill("A");
+            var programmer = Create.Programmer.WithSkill("A");
             team.Add(programmer);
             var backlog = new Backlog();
             backlog.Add(new BacklogItem("US1", new Component("A")));
@@ -78,8 +79,8 @@ namespace Tests
         public void TeamCanDistributeWorkAcrossProgrammersForDay()
         {
             var team = new Team();
-            var programmerA = CreateProgrammerWithSkill("A");
-            var programmerB = CreateProgrammerWithSkill("B");
+            var programmerA = Create.Programmer.WithSkill("A");
+            var programmerB = Create.Programmer.WithSkill("B");
             team.Add(programmerA, programmerB);
             var backlog = new Backlog();
             var componentA = new Component("A");
@@ -90,13 +91,6 @@ namespace Tests
             
             Assert.AreEqual(componentA, programmerA.WorkingOn);
             Assert.AreEqual(componentB, programmerB.WorkingOn);
-        }
-
-        private static Programmer CreateProgrammerWithSkill(string skill)
-        {
-            var programmer = new Programmer();
-            programmer.Learn(new Skill(skill));
-            return programmer;
         }
     }
 }

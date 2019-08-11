@@ -12,17 +12,24 @@ namespace Domain
         public Skill Skill { get; private set; }
         public Component WorkingOn { get; private set; }
 
-        public void WorkOn(Component component)
+        private void WorkOn(Component component)
         {
             WorkingOn = component;
+            component.Process();
         }
 
         public void ChooseWorkFrom(BacklogItem backlogItem)
         {
             var components = backlogItem.Components;
-            var appropriateComponent = components.FirstOrDefault(_ => _.Name == Skill.Name);
-
-            if (appropriateComponent != null) WorkOn(appropriateComponent);
+            var appropriateComponent = components.FirstOrDefault(_ => _.Name == Skill.Name && !_.isProcessing);
+            if (appropriateComponent == null)
+            {
+                WorkOn(Component.None);
+            }
+            else
+            {
+                WorkOn(appropriateComponent);
+            }
         }
     }
 }

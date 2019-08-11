@@ -2,11 +2,23 @@ namespace Domain
 {
     public class Component
     {
+        public bool isProcessing { get; private set; }
         public string Name { get; }
+        public static Component None => new Component(string.Empty);
 
         public Component(string name)
         {
             Name = name;
+        }
+
+        public void Process()
+        {
+            isProcessing = true;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
 
         protected bool Equals(Component other)

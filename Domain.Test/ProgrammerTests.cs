@@ -1,5 +1,6 @@
 using Domain;
 using NUnit.Framework;
+using Tests.DSL;
 
 namespace Tests
 {
@@ -30,13 +31,40 @@ namespace Tests
         {
             var programmer = new Programmer();
             programmer.Learn(new Skill("A"));
-            var componentA = new Component("A");
             var backlogItem = new BacklogItem("US1", 
-                componentA, new Component("B"));
+                new Component("A"), new Component("B"));
             
             programmer.ChooseWorkFrom(backlogItem);
             
-            Assert.AreEqual(componentA, programmer.WorkingOn);
+            Assert.AreEqual(new Component("A"), programmer.WorkingOn);
+        }
+
+        [Test]
+        public void WhenNoWork_BeIdle()
+        {
+            var programmer = new Programmer();
+            programmer.Learn(new Skill("A"));
+            var backlogItem = new BacklogItem("US1", 
+                new Component("B"));
+            
+            programmer.ChooseWorkFrom(backlogItem);
+            
+            Assert.AreEqual(Component.None, programmer.WorkingOn);
+        }
+        
+        [Test]
+        public void aslkjlakm()
+        {
+            var programmer1 = Create.Programmer.WithSkill("A");
+            var programmer2 = Create.Programmer.WithSkill("A");
+            var backlogItem = new BacklogItem("US1", 
+                new Component("A"));
+            
+            programmer1.ChooseWorkFrom(backlogItem);
+            programmer2.ChooseWorkFrom(backlogItem);
+            
+            Assert.AreEqual(new Component("A"), programmer1.WorkingOn);
+            Assert.AreEqual(Component.None, programmer2.WorkingOn);
         }
     }
 }
