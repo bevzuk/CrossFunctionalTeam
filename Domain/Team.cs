@@ -12,5 +12,6 @@ namespace Domain
         }
 
         public IReadOnlyCollection<Programmer> Members => members.AsReadOnly();
+        public Statistics Statistics => new Statistics();
     }
 }
