@@ -10,9 +10,9 @@ namespace Tests
         {
             var programmer = new Programmer();
 
-            programmer.Learn("A");
+            programmer.Learn(new Skill("A"));
             
-            Assert.AreEqual("A", programmer.Skill);
+            Assert.AreEqual(new Skill("A"), programmer.Skill);
         }
         
         [Test]
@@ -20,9 +20,9 @@ namespace Tests
         {
             var programmer = new Programmer();
 
-            programmer.Learn("B");
+            programmer.Learn(new Skill("B"));
             
-            Assert.AreEqual("B", programmer.Skill);
+            Assert.AreEqual(new Skill("B"), programmer.Skill);
         }
     }
 }
