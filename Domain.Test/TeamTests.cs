@@ -57,5 +57,22 @@ namespace Tests
             var statistics = team.Statistics;
             Assert.AreEqual(1, statistics.ThroughputRate);
         }
+
+        [Test]
+        public void CanWorkOnBacklogWithTwoItems()
+        {
+            var team = new Team();
+            var programmer = new Programmer();
+            programmer.Learn(new Skill("A"));
+            team.Add(programmer);
+            var backlog = new Backlog();
+            backlog.Add(new BacklogItem("US1", new Component("A")));
+            backlog.Add(new BacklogItem("US2", new Component("A")));
+            
+            team.WorkOn(backlog);
+            
+            var statistics = team.Statistics;
+            Assert.AreEqual(2, statistics.ThroughputRate);
+        }
     }
 }
