@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Domain
 {
     public class Programmer
@@ -13,6 +15,14 @@ namespace Domain
         public void WorkOn(Component component)
         {
             WorkingOn = component;
+        }
+
+        public void ChooseWorkFrom(BacklogItem backlogItem)
+        {
+            var components = backlogItem.Components;
+            var appropriateComponent = components.FirstOrDefault(_ => _.Name == Skill.Name);
+
+            if (appropriateComponent != null) WorkOn(appropriateComponent);
         }
     }
 }

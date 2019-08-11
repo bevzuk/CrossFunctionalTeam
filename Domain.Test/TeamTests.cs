@@ -75,7 +75,7 @@ namespace Tests
         }
 
         [Test]
-        public void TeamCanDistrubuteWorkAcrossProgrammersForDay()
+        public void TeamCanDistributeWorkAcrossProgrammersForDay()
         {
             var team = new Team();
             var programmerA = CreateProgrammerWithSkill("A");

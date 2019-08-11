@@ -28,12 +28,7 @@ namespace Domain
             var backlogItem = backlog.Items.First();
             foreach (var programmer in Members)
             {
-                var components = backlogItem.Components;
-                var appropriateComponent = components.FirstOrDefault(_ => _.Name == programmer.Skill.Name);
-                if (appropriateComponent != null)
-                {
-                    programmer.WorkOn(appropriateComponent);
-                }
+                programmer.ChooseWorkFrom(backlogItem);
             }
         }
     }

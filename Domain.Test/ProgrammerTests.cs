@@ -24,5 +24,19 @@ namespace Tests
             
             Assert.AreEqual(new Skill("B"), programmer.Skill);
         }
+
+        [Test]
+        public void CanChooseWork()
+        {
+            var programmer = new Programmer();
+            programmer.Learn(new Skill("A"));
+            var componentA = new Component("A");
+            var backlogItem = new BacklogItem("US1", 
+                componentA, new Component("B"));
+            
+            programmer.ChooseWorkFrom(backlogItem);
+            
+            Assert.AreEqual(componentA, programmer.WorkingOn);
+        }
     }
 }
