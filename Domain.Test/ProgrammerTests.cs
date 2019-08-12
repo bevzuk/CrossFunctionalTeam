@@ -53,7 +53,7 @@ namespace Tests
         }
         
         [Test]
-        public void aslkjlakm()
+        public void When2ProgrammersDo1PBI_Programmer2HasNoWork()
         {
             var programmer1 = Create.Programmer.WithSkill("A");
             var programmer2 = Create.Programmer.WithSkill("A");
@@ -66,5 +66,21 @@ namespace Tests
             Assert.AreEqual(new Component("A"), programmer1.WorkingOn);
             Assert.AreEqual(Component.None, programmer2.WorkingOn);
         }
+        
+        [Test]
+        public void CanChooseWorkFromBacklog()
+        {
+            var programmer = new Programmer();
+            programmer.Learn(new Skill("A"));
+            var backlog = new Backlog();
+            backlog.Add(new BacklogItem("US1", 
+                new Component("A"), new Component("B")));
+            
+            programmer.ChooseWorkFrom(backlog);
+            
+            Assert.AreEqual(new Component("A"), programmer.WorkingOn);
+        }
+
+        
     }
 }

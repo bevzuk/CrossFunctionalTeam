@@ -16,6 +16,11 @@ namespace Domain
 
         public IReadOnlyCollection<Component> Components => components.AsReadOnly();
 
+        public Component FindComponentFor(Skill skill)
+        {
+            return Components.FirstOrDefault(_ => _.Name == skill.Name && !_.IsTaken);
+        }
+
         #region Equality members
 
         protected bool Equals(BacklogItem other)

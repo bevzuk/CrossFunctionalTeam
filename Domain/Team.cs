@@ -25,10 +25,9 @@ namespace Domain
 
         public void DistributeWork(Backlog backlog)
         {
-            var backlogItem = backlog.Items.First();
             foreach (var programmer in Members)
             {
-                programmer.ChooseWorkFrom(backlogItem);
+                programmer.ChooseWorkFrom(backlog);
             }
         }
     }

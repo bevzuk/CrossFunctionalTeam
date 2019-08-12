@@ -15,21 +15,34 @@ namespace Domain
         private void WorkOn(Component component)
         {
             WorkingOn = component;
-            component.Process();
+            component.Take();
         }
 
         public void ChooseWorkFrom(BacklogItem backlogItem)
         {
-            var components = backlogItem.Components;
-            var appropriateComponent = components.FirstOrDefault(_ => _.Name == Skill.Name && !_.isProcessing);
-            if (appropriateComponent == null)
-            {
-                WorkOn(Component.None);
-            }
-            else
+            var appropriateComponent = backlogItem.FindComponentFor(Skill);
+            if (appropriateComponent != null)
             {
                 WorkOn(appropriateComponent);
             }
+            else
+            {
+                DoNothing();
+            }
+        }
+
+        public void ChooseWorkFrom(Backlog backlog)
+        {
+            foreach (var backlogItem in backlog.Items)
+            {
+                ChooseWorkFrom(backlogItem);
+                if (!Equals(WorkingOn, Component.None)) return;
+            }
+        }
+
+        private void DoNothing()
+        {
+            WorkOn(Component.None);
         }
     }
 }

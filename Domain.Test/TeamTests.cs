@@ -83,14 +83,30 @@ namespace Tests
             var programmerB = Create.Programmer.WithSkill("B");
             team.Add(programmerA, programmerB);
             var backlog = new Backlog();
-            var componentA = new Component("A");
-            var componentB = new Component("B");
-            backlog.Add(new BacklogItem("US1", componentA, componentB));
+            backlog.Add(new BacklogItem("US1",
+                new Component("A"), new Component("B")));
 
             team.DistributeWork(backlog);
             
-            Assert.AreEqual(componentA, programmerA.WorkingOn);
-            Assert.AreEqual(componentB, programmerB.WorkingOn);
+            Assert.AreEqual(new Component("A"), programmerA.WorkingOn);
+            Assert.AreEqual(new Component("B"), programmerB.WorkingOn);
+        }
+
+        [Test]
+        public void TeamCanDistributeTwoBacklogItemsAcrossProgrammersForDay()
+        {
+            var team = new Team();
+            var programmerA = Create.Programmer.WithSkill("A");
+            var programmerB = Create.Programmer.WithSkill("B");
+            team.Add(programmerA, programmerB);
+            var backlog = new Backlog();
+            backlog.Add(new BacklogItem("US1", new Component("A")));
+            backlog.Add(new BacklogItem("US2", new Component("B")));
+
+            team.DistributeWork(backlog);
+            
+            Assert.AreEqual(new Component("A"), programmerA.WorkingOn);
+            Assert.AreEqual(new Component("B"), programmerB.WorkingOn);
         }
     }
 }
