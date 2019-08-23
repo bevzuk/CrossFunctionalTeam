@@ -1,4 +1,3 @@
-using System.Collections;
 using Domain;
 using NUnit.Framework;
 using Tests.DSL;
