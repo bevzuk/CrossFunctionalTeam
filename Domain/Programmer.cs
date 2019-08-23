@@ -4,18 +4,20 @@ namespace Domain
 {
     public class Programmer
     {
+        public string Name { get; }
+
+        public Skill Skill { get; private set; }
+
+        public Component WorkingOn { get; private set; }
+
+        public Programmer(string name = "")
+        {
+            Name = name;
+        }
+
         public void Learn(Skill skill)
         {
             Skill = skill;
-        }
-
-        public Skill Skill { get; private set; }
-        public Component WorkingOn { get; private set; }
-
-        private void WorkOn(Component component)
-        {
-            WorkingOn = component;
-            component.Take();
         }
 
         public void ChooseWorkFrom(BacklogItem backlogItem)
@@ -38,6 +40,12 @@ namespace Domain
                 ChooseWorkFrom(backlogItem);
                 if (!Equals(WorkingOn, Component.None)) return;
             }
+        }
+
+        private void WorkOn(Component component)
+        {
+            WorkingOn = component;
+            component.Take();
         }
 
         private void DoNothing()
