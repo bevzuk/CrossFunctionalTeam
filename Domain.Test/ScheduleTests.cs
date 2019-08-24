@@ -17,9 +17,9 @@ namespace Domain.Test
 
             var schedule = new Schedule(backlog, team);
             
-            Assert.That(schedule, Looks.Like(@"
-|   | Homer |
-| 1 | US1.A |"));
+            Assert.That(schedule.AsString(), Looks.Like(@"
+                |   | Homer |
+                | 1 | US1.A |"));
         }
 
         [Test]
@@ -33,9 +33,9 @@ namespace Domain.Test
 
             var schedule = new Schedule(backlog, team);
             
-            Assert.That(schedule, Looks.Like(@"
-|   | Homer |
-| 1 | US1.B |"));
+            Assert.That(schedule.AsString(), Looks.Like(@"
+                |   | Homer |
+                | 1 | US1.B |"));
         }
     }
 }

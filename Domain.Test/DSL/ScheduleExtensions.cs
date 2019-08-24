@@ -7,8 +7,10 @@ namespace Domain.Test.DSL
     {
         public static string AsString(this Schedule schedule)
         {
-            var teamMembers = "|   |" + string.Join('|', schedule.TeamMembers.Select(_ => _.Name)) + "|";
-            return teamMembers + Environment.NewLine +  "| 1 |" + schedule.Data.Select(_ => _.BacklogItem + "." + _.Component).First() + "|";
+            var teamMembers =
+                $"{Environment.NewLine}|   |{string.Join('|', schedule.TeamMembers.Select(_ => _.Name))}|";
+            return
+                $"{teamMembers}{Environment.NewLine}| 1 |{schedule.Data.Select(_ => _.BacklogItem + "." + _.Component).First()}|";
         }
     }
 }

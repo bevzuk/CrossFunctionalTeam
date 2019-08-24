@@ -16,16 +16,16 @@ namespace Domain.Test.DSL
             return new ConstraintResult(this, actual, AreEquivalent(actual));
         }
 
-        //public override string Description => "Azazazaza";
+        public override string Description => $"\"{expected}\"";
 
         private bool AreEquivalent<TActual>(TActual actual)
         {
-            if (actual.GetType() != typeof(Schedule)) return false;
+            if (actual.GetType() != typeof(string)) return false;
             
-            var actualSchedule = actual as Schedule;
+            var actualSchedule = actual as string;
             
             var trimmedExpected = expected.Replace(" ", "").Trim('\n');
-            var trimmedSchedule = actualSchedule.AsString().Replace(" ", "").Trim('\n');
+            var trimmedSchedule = actualSchedule.Replace(" ", "").Trim('\n');
             
             return trimmedExpected == trimmedSchedule;
         }
