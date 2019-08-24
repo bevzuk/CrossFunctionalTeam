@@ -1,9 +1,8 @@
-using Domain;
 using Domain.Test.DSL;
 using NUnit.Framework;
 using Tests.DSL;
 
-namespace Tests
+namespace Domain.Test
 {
     public class ScheduleTests
     {
@@ -18,9 +17,9 @@ namespace Tests
 
             var schedule = new Schedule(backlog, team);
             
-            AssertEquals(@"
+            Assert.That(schedule, Looks.Like(@"
 |   | Homer |
-| 1 | US1.A |", schedule);
+| 1 | US1.A |"));
         }
 
         [Test]
@@ -34,24 +33,9 @@ namespace Tests
 
             var schedule = new Schedule(backlog, team);
             
-            AssertEquals(@"
+            Assert.That(schedule, Looks.Like(@"
 |   | Homer |
-| 1 | US1.B |", schedule);
-        }
-
-        private void AssertEquals(string expected, Schedule schedule)
-        {
-            var trimmedExpected = expected.Replace(" ", "").Trim('\n');
-            var trimmedSchedule = schedule.AsString().Replace(" ", "").Trim('\n');
-            
-            if (trimmedExpected != trimmedSchedule)
-            {
-                Assert.Fail($@"Expected:
-{expected}
-
-Actual:
-{schedule.AsString()}");
-            }
+| 1 | US1.B |"));
         }
     }
 }
