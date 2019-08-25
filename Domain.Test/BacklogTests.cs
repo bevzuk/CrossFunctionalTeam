@@ -1,8 +1,7 @@
 using System.Linq;
-using Domain;
 using NUnit.Framework;
 
-namespace Tests
+namespace Domain.Test
 {
     public class BacklogTests
     {
@@ -37,9 +36,11 @@ namespace Tests
             var backlogItems = backlog.Items;
 
             CollectionAssert.AreEqual(
-                new[] {
-                    new BacklogItem("US1"), 
-                    new BacklogItem("US2")},
+                new[]
+                {
+                    new BacklogItem("US1"),
+                    new BacklogItem("US2")
+                },
                 backlogItems);
         }
 

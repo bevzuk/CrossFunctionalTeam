@@ -1,6 +1,5 @@
 using Domain.Test.DSL;
 using NUnit.Framework;
-using Tests.DSL;
 
 namespace Domain.Test
 {

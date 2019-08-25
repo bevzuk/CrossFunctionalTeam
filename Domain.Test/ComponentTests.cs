@@ -1,7 +1,6 @@
-using Domain;
 using NUnit.Framework;
 
-namespace Tests
+namespace Domain.Test
 {
     public class ComponentTests
     {
@@ -9,7 +8,7 @@ namespace Tests
         public void ComponentIsNotEqualToNull()
         {
             var component = new Component("A");
-            
+
             Assert.False(component == null);
         }
     }

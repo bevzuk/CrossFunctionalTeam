@@ -1,8 +1,7 @@
-using Domain;
+using Domain.Test.DSL;
 using NUnit.Framework;
-using Tests.DSL;
 
-namespace Tests
+namespace Domain.Test
 {
     public class ProgrammerTests
     {

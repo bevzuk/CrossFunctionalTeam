@@ -20,7 +20,7 @@ namespace Domain.Test.DSL
 
         private bool AreEquivalent<TActual>(TActual actual)
         {
-            if (actual.GetType() != typeof(WorkItem)) return false;
+            if (!(actual is WorkItem)) return false;
 
             var actualWorkItem = actual as WorkItem;
 
