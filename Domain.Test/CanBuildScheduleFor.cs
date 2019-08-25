@@ -65,5 +65,47 @@ namespace Domain.Test
                 |   | Homer | Marge |
                 | 1 | US1.A | US2.B |"));
         }
+
+        [Test]
+        public void TwoBacklogItems_OneComponent_OneProgrammer_TwoDays()
+        {
+            var team = Create.Team
+                .WithProgrammer("Homer", "A");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A")
+                .WithItem("US2", "A");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer |
+                | 1 | US1.A |
+                | 2 | US2.A |"));
+        }
+
+        [Test]
+        public void Scenario1()
+        {
+            var team = Create.Team
+                .WithProgrammer("Homer", "A")
+                .WithProgrammer("Marge", "B")
+                .WithProgrammer("Bart", "C");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A", "A", "B")
+                .WithItem("US2", "A", "B", "B")
+                .WithItem("US3", "A", "B", "C")
+                .WithItem("US4", "B", "B", "C");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge | Bart  |
+                | 1 | US1.A | US1.B | US3.C |
+                | 2 | US1.A | US2.B | US4.C |
+                | 3 | US2.A | US2.B | .     |
+                | 4 | US3.A | US3.B | .     |
+                | 5 | .     | US4.B | .     |
+                | 6 | .     | US4.B | .     |"));
+        }
     }
 }

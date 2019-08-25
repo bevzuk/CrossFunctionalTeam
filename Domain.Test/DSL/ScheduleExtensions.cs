@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 
 namespace Domain.Test.DSL
 {
@@ -7,11 +8,22 @@ namespace Domain.Test.DSL
     {
         public static string AsString(this Schedule schedule)
         {
+            var result = new StringBuilder();
+
             var teamMembers =
                 $"{Environment.NewLine}|   |{string.Join('|', schedule.TeamMembers.Select(_ => _.Name))}|";
-            var firstDaySchedule = string.Join('|', schedule.Data.Select(_ => _.BacklogItem + "." + _.Component));
-            return
-                $"{teamMembers}{Environment.NewLine}| 1 |{firstDaySchedule}|";
+            result.AppendLine(teamMembers);
+
+            var days = schedule.Data.Select(_ => _.Day).Distinct().OrderBy(_ => _);
+            foreach (var day in days)
+            {
+                var dayWork = string.Join('|',
+                    schedule.Data.Where(_ => _.Day == day)
+                        .Select(_ => _.BacklogItem + "." + _.Component));
+                result.AppendLine($"| {day} | {dayWork} |");
+            }
+
+            return result.ToString();
         }
     }
 }

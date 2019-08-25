@@ -111,5 +111,21 @@ namespace Domain.Test
             Assert.That(programmerB.WorkItem, Looks.LikeWorkItem("US1.B"));
             Assert.That(programmerC.WorkItem, Looks.LikeWorkItem("US2.C"));
         }
+
+
+        [Test]
+        public void SecondWorkDistribution_DistributesSecondWorkItem()
+        {
+            var homer = Create.Programmer.WithSkill("A");
+            var team = Create.Team.With(homer).Please;
+            var backlog = Create.Backlog
+                .WithItem("US1", "A")
+                .WithItem("US2", "A");
+
+            team.DistributeWork(backlog);
+            team.DistributeWork(backlog);
+
+            Assert.That(homer.WorkItem, Looks.LikeWorkItem("US2.A"));
+        }
     }
 }
