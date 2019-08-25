@@ -6,7 +6,7 @@ namespace Tests.DSL
     {
         private readonly Team team = new Team();
 
-        public TeamBuilder WithProgrammers(params Programmer[] programmers)
+        public TeamBuilder With(params Programmer[] programmers)
         {
             foreach (var programmer in programmers)
             {
@@ -17,5 +17,10 @@ namespace Tests.DSL
         }
 
         public Team Please => team;
+        
+        public static implicit operator Team(TeamBuilder builder)
+        {
+            return builder.team;
+        }
     }
 }

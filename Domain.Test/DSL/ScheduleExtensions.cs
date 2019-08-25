@@ -9,8 +9,9 @@ namespace Domain.Test.DSL
         {
             var teamMembers =
                 $"{Environment.NewLine}|   |{string.Join('|', schedule.TeamMembers.Select(_ => _.Name))}|";
+            var firstDaySchedule = string.Join('|', schedule.Data.Select(_ => _.BacklogItem + "." + _.Component));
             return
-                $"{teamMembers}{Environment.NewLine}| 1 |{schedule.Data.Select(_ => _.BacklogItem + "." + _.Component).First()}|";
+                $"{teamMembers}{Environment.NewLine}| 1 |{firstDaySchedule}|";
         }
     }
 }

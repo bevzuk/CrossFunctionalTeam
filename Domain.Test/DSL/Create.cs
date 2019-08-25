@@ -1,3 +1,5 @@
+using Domain.Test.DSL;
+
 namespace Tests.DSL
 {
     public static class Create

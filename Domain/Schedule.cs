@@ -25,7 +25,10 @@ namespace Domain
         private void CalculateSchedule()
         {
             team.DistributeWork(backlog);
-            data.Add(new ScheduleData("US1", team.Members.First().WorkingOn.Name));
+            foreach (var teamMember in team.Members)
+            {
+                data.Add(new ScheduleData("US1", teamMember.WorkingOn.Name));
+            }
         }
     }
 }

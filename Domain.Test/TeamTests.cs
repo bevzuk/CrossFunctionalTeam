@@ -62,11 +62,11 @@ namespace Tests
         public void CanWorkOnBacklogWithTwoItems()
         {
             var team = Create.Team
-                .WithProgrammers(Create.Programmer.WithSkill("A"))
+                .With(Create.Programmer.WithSkill("A"))
                 .Please;
             var backlog = Create.Backlog
-                .With(() => Create.BacklogItem("US1").WithComponent("A"))
-                .With(() => Create.BacklogItem("US2").WithComponent("A"))
+                .With(Create.BacklogItem("US2").WithComponent("A"))
+                .With(Create.BacklogItem("US1").WithComponent("A"))
                 .Please;
 
             team.WorkOn(backlog);
@@ -79,9 +79,9 @@ namespace Tests
         {
             var programmerA = Create.Programmer.WithSkill("A");
             var programmerB = Create.Programmer.WithSkill("B");
-            var team = Create.Team.WithProgrammers(programmerA, programmerB).Please;
+            var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .With(() => Create.BacklogItem("US1").WithComponent("A").WithComponent("B"))
+                .With(Create.BacklogItem("US1").WithComponent("A").WithComponent("B"))
                 .Please;
 
             team.DistributeWork(backlog);
@@ -95,10 +95,10 @@ namespace Tests
         {
             var programmerA = Create.Programmer.WithSkill("A");
             var programmerB = Create.Programmer.WithSkill("B");
-            var team = Create.Team.WithProgrammers(programmerA, programmerB).Please;
+            var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .With(() => Create.BacklogItem("US1").WithComponent("A"))
-                .With(() => Create.BacklogItem("US2").WithComponent("B"))
+                .With(Create.BacklogItem("US1").WithComponent("A"))
+                .With(Create.BacklogItem("US2").WithComponent("B"))
                 .Please;
 
             team.DistributeWork(backlog);
@@ -113,11 +113,11 @@ namespace Tests
             var programmerA = Create.Programmer.WithSkill("A");
             var programmerB = Create.Programmer.WithSkill("B");
             var programmerC = Create.Programmer.WithSkill("C");
-            var team = Create.Team.WithProgrammers(programmerA, programmerB, programmerC).Please;
+            var team = Create.Team.With(programmerA, programmerB, programmerC).Please;
             var backlog = Create.Backlog
-                .With(() => Create.BacklogItem("US1").WithComponent("A").WithComponent("A").WithComponent("B"))
-                .With(() => Create.BacklogItem("US2").WithComponent("A").WithComponent("B").WithComponent("B"))
-                .With(() => Create.BacklogItem("US3").WithComponent("A").WithComponent("B").WithComponent("C"))
+                .With(Create.BacklogItem("US1").WithComponent("A").WithComponent("A").WithComponent("B"))
+                .With(Create.BacklogItem("US2").WithComponent("A").WithComponent("B").WithComponent("B"))
+                .With(Create.BacklogItem("US3").WithComponent("A").WithComponent("B").WithComponent("C"))
                 .Please;
 
             team.DistributeWork(backlog);

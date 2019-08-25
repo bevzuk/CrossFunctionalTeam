@@ -1,18 +1,30 @@
-using System;
-using Domain;
+using System.Linq;
 
-namespace Tests.DSL
+namespace Domain.Test.DSL
 {
     public class BacklogBuilder
     {
         private readonly Backlog backlog = new Backlog();
-        
-        public BacklogBuilder With(Func<BacklogItemBuilder> buildBacklogItem)
+
+        public BacklogBuilder With(BacklogItem backlogItem)
         {
-            backlog.Add(buildBacklogItem());
+            backlog.Add(backlogItem);
+            return this;
+        }
+
+        public BacklogBuilder With(string backlogItemName, params string[] componentNames)
+        {
+            var components = componentNames.Select(_ => new Component(_)).ToArray();
+            var backlogItem = new BacklogItem(backlogItemName, components);
+            backlog.Add(backlogItem);
             return this;
         }
 
         public Backlog Please => backlog;
+        
+        public static implicit operator Backlog(BacklogBuilder builder)
+        {
+            return builder.backlog;
+        }
     }
 }
