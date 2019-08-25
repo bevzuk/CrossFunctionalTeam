@@ -61,13 +61,10 @@ namespace Tests
         [Test]
         public void CanWorkOnBacklogWithTwoItems()
         {
-            var team = Create.Team
-                .With(Create.Programmer.WithSkill("A"))
-                .Please;
+            var team = Create.Team.WithSomeProgrammer("A").Please;
             var backlog = Create.Backlog
-                .With(Create.BacklogItem("US2").WithComponent("A"))
-                .With(Create.BacklogItem("US1").WithComponent("A"))
-                .Please;
+                .WithItem("US2", "A")
+                .WithItem("US1", "A");
 
             team.WorkOn(backlog);
 
@@ -81,8 +78,7 @@ namespace Tests
             var programmerB = Create.Programmer.WithSkill("B");
             var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .With(Create.BacklogItem("US1").WithComponent("A").WithComponent("B"))
-                .Please;
+                .WithItem("US1","A", "B");
 
             team.DistributeWork(backlog);
 
@@ -97,9 +93,8 @@ namespace Tests
             var programmerB = Create.Programmer.WithSkill("B");
             var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .With(Create.BacklogItem("US1").WithComponent("A"))
-                .With(Create.BacklogItem("US2").WithComponent("B"))
-                .Please;
+                .WithItem("US1", "A")
+                .WithItem("US2", "B");
 
             team.DistributeWork(backlog);
 
@@ -115,10 +110,9 @@ namespace Tests
             var programmerC = Create.Programmer.WithSkill("C");
             var team = Create.Team.With(programmerA, programmerB, programmerC).Please;
             var backlog = Create.Backlog
-                .With(Create.BacklogItem("US1").WithComponent("A").WithComponent("A").WithComponent("B"))
-                .With(Create.BacklogItem("US2").WithComponent("A").WithComponent("B").WithComponent("B"))
-                .With(Create.BacklogItem("US3").WithComponent("A").WithComponent("B").WithComponent("C"))
-                .Please;
+                .WithItem("US1", "A", "A", "B")
+                .WithItem("US2", "A", "B", "B")
+                .WithItem("US3", "A", "B", "C");
 
             team.DistributeWork(backlog);
 

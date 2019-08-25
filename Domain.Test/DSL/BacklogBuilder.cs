@@ -6,17 +6,9 @@ namespace Domain.Test.DSL
     {
         private readonly Backlog backlog = new Backlog();
 
-        public BacklogBuilder With(BacklogItem backlogItem)
+        public BacklogBuilder WithItem(string name, params string[] components)
         {
-            backlog.Add(backlogItem);
-            return this;
-        }
-
-        public BacklogBuilder With(string backlogItemName, params string[] componentNames)
-        {
-            var components = componentNames.Select(_ => new Component(_)).ToArray();
-            var backlogItem = new BacklogItem(backlogItemName, components);
-            backlog.Add(backlogItem);
+            backlog.Add(new BacklogItem(name, components.Select(_ => new Component(_)).ToArray()));
             return this;
         }
 

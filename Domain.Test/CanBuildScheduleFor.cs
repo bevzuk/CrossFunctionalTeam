@@ -9,10 +9,9 @@ namespace Domain.Test
         [Test]
         public void OneBacklogItem_OneComponent_OneProgrammer()
         {
-            var programmer = Create.Programmer.WithName("Homer").WithSkill("A");
-            var team = Create.Team.With(programmer);
+            var team = Create.Team.WithProgrammer("Homer", "A");
             var backlog = Create.Backlog
-                .With("US1", "A");
+                .WithItem("US1", "A");
 
             var schedule = new Schedule(backlog, team);
             
@@ -24,10 +23,9 @@ namespace Domain.Test
         [Test]
         public void OneBacklogItem_OneComponent_AnotherProgrammer()
         {
-            var programmer = Create.Programmer.WithName("Homer").WithSkill("B");
-            var team = Create.Team.With(programmer);
+            var team = Create.Team.WithProgrammer("Homer", "B");
             var backlog = Create.Backlog
-                .With("US1","B");
+                .WithItem("US1","B");
 
             var schedule = new Schedule(backlog, team);
 
@@ -39,11 +37,11 @@ namespace Domain.Test
         [Test]
         public void OneBacklogItem_TwoComponents_TwoProgrammers()
         {
-            var homer = Create.Programmer.WithName("Homer").WithSkill("A");
-            var marge = Create.Programmer.WithName("Marge").WithSkill("B");
-            var team = Create.Team.With(homer, marge);
+            var team = Create.Team
+                .WithProgrammer("Homer", "A")
+                .WithProgrammer("Marge", "B");
             var backlog = Create.Backlog
-                .With("US1", "A", "B");
+                .WithItem("US1", "A", "B");
 
             var schedule = new Schedule(backlog, team);
             
