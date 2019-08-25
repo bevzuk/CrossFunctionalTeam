@@ -82,8 +82,8 @@ namespace Tests
 
             team.DistributeWork(backlog);
 
-            Assert.That(programmerA.WorkingOn, Is.EqualTo(new Component("A")));
-            Assert.That(programmerB.WorkingOn, Is.EqualTo(new Component("B")));
+            Assert.That(programmerA.WorkingOnComponent, Is.EqualTo(new Component("A")));
+            Assert.That(programmerB.WorkingOnComponent, Is.EqualTo(new Component("B")));
         }
 
         [Test]
@@ -98,8 +98,8 @@ namespace Tests
 
             team.DistributeWork(backlog);
 
-            Assert.That(programmerA.WorkingOn, Is.EqualTo(new Component("A")));
-            Assert.That(programmerB.WorkingOn, Is.EqualTo(new Component("B")));
+            Assert.That(programmerA.WorkingOnComponent, Is.EqualTo(new Component("A")));
+            Assert.That(programmerB.WorkingOnComponent, Is.EqualTo(new Component("B")));
         }
 
         [Test]
@@ -116,9 +116,9 @@ namespace Tests
 
             team.DistributeWork(backlog);
 
-            Assert.That(programmerA.WorkingOn, Is.EqualTo(new Component("A")));
-            Assert.That(programmerB.WorkingOn, Is.EqualTo(new Component("B")));
-            Assert.That(programmerC.WorkingOn, Is.EqualTo(new Component("C")));
+            Assert.That(programmerA.WorkingOnComponent, Is.EqualTo(new Component("A")));
+            Assert.That(programmerB.WorkingOnComponent, Is.EqualTo(new Component("B")));
+            Assert.That(programmerC.WorkingOnComponent, Is.EqualTo(new Component("C")));
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Tests
             
             programmer.ChooseWorkFrom(backlogItem);
             
-            Assert.AreEqual(new Component("A"), programmer.WorkingOn);
+            Assert.AreEqual(new Component("A"), programmer.WorkingOnComponent);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Tests
             
             programmer.ChooseWorkFrom(backlogItem);
             
-            Assert.AreEqual(Component.None, programmer.WorkingOn);
+            Assert.AreEqual(Component.None, programmer.WorkingOnComponent);
         }
         
         [Test]
@@ -63,8 +63,8 @@ namespace Tests
             programmer1.ChooseWorkFrom(backlogItem);
             programmer2.ChooseWorkFrom(backlogItem);
             
-            Assert.AreEqual(new Component("A"), programmer1.WorkingOn);
-            Assert.AreEqual(Component.None, programmer2.WorkingOn);
+            Assert.AreEqual(new Component("A"), programmer1.WorkingOnComponent);
+            Assert.AreEqual(Component.None, programmer2.WorkingOnComponent);
         }
         
         [Test]
@@ -78,7 +78,7 @@ namespace Tests
             
             programmer.ChooseWorkFrom(backlog);
             
-            Assert.AreEqual(new Component("A"), programmer.WorkingOn);
+            Assert.AreEqual(new Component("A"), programmer.WorkingOnComponent);
         }
 
         

@@ -12,8 +12,6 @@ namespace Domain.Test.DSL
             return this;
         }
 
-        public Backlog Please => backlog;
-        
         public static implicit operator Backlog(BacklogBuilder builder)
         {
             return builder.backlog;

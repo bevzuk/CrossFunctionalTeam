@@ -15,6 +15,8 @@ namespace Domain
         }
 
         public IReadOnlyCollection<Component> Components => components.AsReadOnly();
+        
+        public static BacklogItem None => new BacklogItem(string.Empty);
 
         public Component FindComponentFor(Skill skill)
         {

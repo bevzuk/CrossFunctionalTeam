@@ -8,7 +8,8 @@ namespace Domain
 
         public Skill Skill { get; private set; }
 
-        public Component WorkingOn { get; private set; }
+        public BacklogItem WorkingOnBacklogItem { get; private set; }
+        public Component WorkingOnComponent { get; private set; }
 
         public Programmer(string name = "")
         {
@@ -20,12 +21,21 @@ namespace Domain
             Skill = skill;
         }
 
+        public void ChooseWorkFrom(Backlog backlog)
+        {
+            foreach (var backlogItem in backlog.Items)
+            {
+                ChooseWorkFrom(backlogItem);
+                if (!Equals(WorkingOnComponent, Component.None)) return;
+            }
+        }
+
         public void ChooseWorkFrom(BacklogItem backlogItem)
         {
             var appropriateComponent = backlogItem.FindComponentFor(Skill);
             if (appropriateComponent != null)
             {
-                WorkOn(appropriateComponent);
+                WorkOn(backlogItem, appropriateComponent);
             }
             else
             {
@@ -33,24 +43,16 @@ namespace Domain
             }
         }
 
-        public void ChooseWorkFrom(Backlog backlog)
+        private void WorkOn(BacklogItem backlogItem, Component component)
         {
-            foreach (var backlogItem in backlog.Items)
-            {
-                ChooseWorkFrom(backlogItem);
-                if (!Equals(WorkingOn, Component.None)) return;
-            }
-        }
-
-        private void WorkOn(Component component)
-        {
-            WorkingOn = component;
+            WorkingOnBacklogItem = backlogItem;
+            WorkingOnComponent = component;
             component.Take();
         }
 
         private void DoNothing()
         {
-            WorkOn(Component.None);
+            WorkOn(BacklogItem.None, Component.None);
         }
     }
 }
