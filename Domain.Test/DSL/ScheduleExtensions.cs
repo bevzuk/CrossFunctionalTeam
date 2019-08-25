@@ -11,16 +11,16 @@ namespace Domain.Test.DSL
             var result = new StringBuilder();
 
             var teamMembers =
-                $"{Environment.NewLine}|   |{string.Join('|', schedule.TeamMembers.Select(_ => _.Name))}|";
+                $"{Environment.NewLine}|   | {string.Join(" | ", schedule.TeamMembers.Select(_ => _.Name))} |";
             result.AppendLine(teamMembers);
 
             var days = schedule.Data.Select(_ => _.Day).Distinct().OrderBy(_ => _);
             foreach (var day in days)
             {
-                var dayWork = string.Join('|',
+                var work = string.Join(" | ",
                     schedule.Data.Where(_ => _.Day == day)
-                        .Select(_ => _.BacklogItem + "." + _.Component));
-                result.AppendLine($"| {day} | {dayWork} |");
+                        .Select(_ => $"{_.BacklogItem}.{_.Component}"));
+                result.AppendLine($"| {day} | {work} |");
             }
 
             return result.ToString();

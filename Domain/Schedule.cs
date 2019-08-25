@@ -27,8 +27,7 @@ namespace Domain
                 day++;
                 team.DistributeWork(backlog);
                 foreach (var teamMember in team.Members)
-                    data.Add(new ScheduleData(day, teamMember.WorkItem.BacklogItem.Name,
-                        teamMember.WorkItem.Component.Name));
+                    data.Add(new ScheduleData(day, teamMember.WorkItem));
             }
         }
     }

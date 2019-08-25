@@ -24,7 +24,7 @@ namespace Domain
 
         #region Equality members
 
-        protected bool Equals(Component other)
+        private bool Equals(Component other)
         {
             return Name == other.Name;
         }

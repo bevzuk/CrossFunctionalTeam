@@ -2,11 +2,11 @@ namespace Domain
 {
     public class ScheduleData
     {
-        public ScheduleData(int day, string backlogItem, string component)
+        public ScheduleData(int day, WorkItem workItem)
         {
             Day = day;
-            BacklogItem = backlogItem;
-            Component = component;
+            BacklogItem = workItem.BacklogItem.Name;
+            Component = workItem.Component.Name;
         }
 
         public int Day { get; }

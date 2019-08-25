@@ -29,9 +29,9 @@ namespace Domain
 
         public void ChooseWorkFrom(BacklogItem backlogItem)
         {
-            var appropriateComponent = backlogItem.FindComponentFor(Skill);
-            if (appropriateComponent != null)
-                WorkOn(backlogItem, appropriateComponent);
+            var componentToWork = backlogItem.FindComponentFor(Skill);
+            if (componentToWork != null)
+                WorkOn(backlogItem, componentToWork);
             else
                 DoNothing();
         }
