@@ -14,8 +14,8 @@ namespace Domain.Test
                 .WithItem("US1", "A");
 
             var schedule = new Schedule(backlog, team);
-            
-            Assert.That(schedule.AsString(), Looks.Like(@"
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
                 |   | Homer |
                 | 1 | US1.A |"));
         }
@@ -25,11 +25,11 @@ namespace Domain.Test
         {
             var team = Create.Team.WithProgrammer("Homer", "B");
             var backlog = Create.Backlog
-                .WithItem("US1","B");
+                .WithItem("US1", "B");
 
             var schedule = new Schedule(backlog, team);
 
-            Assert.That(schedule.AsString(), Looks.Like(@"
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
                 |   | Homer |
                 | 1 | US1.B |"));
         }
@@ -44,8 +44,8 @@ namespace Domain.Test
                 .WithItem("US1", "A", "B");
 
             var schedule = new Schedule(backlog, team);
-            
-            Assert.That(schedule.AsString(), Looks.Like(@"
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
                 |   | Homer | Marge |
                 | 1 | US1.A | US1.B |"));
         }
@@ -61,8 +61,8 @@ namespace Domain.Test
                 .WithItem("US2", "B");
 
             var schedule = new Schedule(backlog, team);
-            
-            Assert.That(schedule.AsString(), Looks.Like(@"
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
                 |   | Homer | Marge |
                 | 1 | US1.A | US2.B |"));
         }

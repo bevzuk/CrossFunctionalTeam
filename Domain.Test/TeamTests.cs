@@ -1,4 +1,5 @@
 using Domain;
+using Domain.Test.DSL;
 using NUnit.Framework;
 using Tests.DSL;
 
@@ -78,12 +79,12 @@ namespace Tests
             var programmerB = Create.Programmer.WithSkill("B");
             var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .WithItem("US1","A", "B");
+                .WithItem("US1", "A", "B");
 
             team.DistributeWork(backlog);
 
-            Assert.That(programmerA.WorkingOnComponent, Is.EqualTo(new Component("A")));
-            Assert.That(programmerB.WorkingOnComponent, Is.EqualTo(new Component("B")));
+            Assert.That(programmerA.WorkItem, Looks.LikeWorkItem("US1.A"));
+            Assert.That(programmerB.WorkItem, Looks.LikeWorkItem("US1.B"));
         }
 
         [Test]
@@ -98,8 +99,8 @@ namespace Tests
 
             team.DistributeWork(backlog);
 
-            Assert.That(programmerA.WorkingOnComponent, Is.EqualTo(new Component("A")));
-            Assert.That(programmerB.WorkingOnComponent, Is.EqualTo(new Component("B")));
+            Assert.That(programmerA.WorkItem, Looks.LikeWorkItem("US1.A"));
+            Assert.That(programmerB.WorkItem, Looks.LikeWorkItem("US2.B"));
         }
 
         [Test]
@@ -110,15 +111,14 @@ namespace Tests
             var programmerC = Create.Programmer.WithSkill("C");
             var team = Create.Team.With(programmerA, programmerB, programmerC).Please;
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C");
+                .WithItem("US1", "A", "B")
+                .WithItem("US2", "C");
 
             team.DistributeWork(backlog);
 
-            Assert.That(programmerA.WorkingOnComponent, Is.EqualTo(new Component("A")));
-            Assert.That(programmerB.WorkingOnComponent, Is.EqualTo(new Component("B")));
-            Assert.That(programmerC.WorkingOnComponent, Is.EqualTo(new Component("C")));
+            Assert.That(programmerA.WorkItem, Looks.LikeWorkItem("US1.A"));
+            Assert.That(programmerB.WorkItem, Looks.LikeWorkItem("US1.B"));
+            Assert.That(programmerC.WorkItem, Looks.LikeWorkItem("US2.C"));
         }
     }
 }

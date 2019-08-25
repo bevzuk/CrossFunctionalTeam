@@ -1,13 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace Domain
 {
     public class Schedule
     {
-        private Backlog backlog;
-        private Team team;
+        private readonly Backlog backlog;
+        private readonly List<ScheduleData> data = new List<ScheduleData>();
+        private readonly Team team;
 
         public Schedule(Backlog backlog, Team team)
         {
@@ -18,17 +17,13 @@ namespace Domain
         }
 
         public IReadOnlyCollection<Programmer> TeamMembers => team.Members;
-
         public IReadOnlyCollection<ScheduleData> Data => data.AsReadOnly();
-        private readonly List<ScheduleData> data = new List<ScheduleData>(); 
 
         private void CalculateSchedule()
         {
             team.DistributeWork(backlog);
             foreach (var teamMember in team.Members)
-            {
-                data.Add(new ScheduleData(teamMember.WorkingOnBacklogItem.Name, teamMember.WorkingOnComponent.Name));
-            }
+                data.Add(new ScheduleData(teamMember.WorkItem.BacklogItem.Name, teamMember.WorkItem.Component.Name));
         }
     }
 }

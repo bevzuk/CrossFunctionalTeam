@@ -1,20 +1,17 @@
-using System.Linq;
-
 namespace Domain
 {
     public class Programmer
     {
-        public string Name { get; }
-
-        public Skill Skill { get; private set; }
-
-        public BacklogItem WorkingOnBacklogItem { get; private set; }
-        public Component WorkingOnComponent { get; private set; }
-
         public Programmer(string name = "")
         {
             Name = name;
         }
+
+        public string Name { get; }
+
+        public Skill Skill { get; private set; }
+
+        public WorkItem WorkItem { get; private set; }
 
         public void Learn(Skill skill)
         {
@@ -26,7 +23,7 @@ namespace Domain
             foreach (var backlogItem in backlog.Items)
             {
                 ChooseWorkFrom(backlogItem);
-                if (!Equals(WorkingOnComponent, Component.None)) return;
+                if (!Equals(WorkItem.Component, Component.None)) return;
             }
         }
 
@@ -34,19 +31,14 @@ namespace Domain
         {
             var appropriateComponent = backlogItem.FindComponentFor(Skill);
             if (appropriateComponent != null)
-            {
                 WorkOn(backlogItem, appropriateComponent);
-            }
             else
-            {
                 DoNothing();
-            }
         }
 
         private void WorkOn(BacklogItem backlogItem, Component component)
         {
-            WorkingOnBacklogItem = backlogItem;
-            WorkingOnComponent = component;
+            WorkItem = new WorkItem(backlogItem, component);
             component.Take();
         }
 
