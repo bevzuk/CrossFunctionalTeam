@@ -5,7 +5,9 @@ namespace Domain
     public class Schedule
     {
         private readonly Backlog backlog;
+
         private readonly List<ScheduleData> data = new List<ScheduleData>();
+
         private readonly Team team;
 
         public Schedule(Backlog backlog, Team team)

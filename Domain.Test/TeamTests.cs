@@ -29,41 +29,6 @@ namespace Domain.Test
         }
 
         [Test]
-        public void ByDefault_TeamStatistics_IsZero()
-        {
-            var team = Create.Team.Please;
-
-            var statistics = team.Statistics;
-
-            Assert.AreEqual(0, statistics.ThroughputRate);
-        }
-
-        [Test]
-        public void CanWorkOnSingleBacklogItem()
-        {
-            var team = Create.Team.WithSomeProgrammer("A").Please;
-            var backlog = Create.Backlog.WithItem("US1", "A");
-
-            team.WorkOn(backlog);
-
-            var statistics = team.Statistics;
-            Assert.AreEqual(1, statistics.ThroughputRate);
-        }
-
-        [Test]
-        public void CanWorkOnBacklogWithTwoItems()
-        {
-            var team = Create.Team.WithSomeProgrammer("A").Please;
-            var backlog = Create.Backlog
-                .WithItem("US2", "A")
-                .WithItem("US1", "A");
-
-            team.WorkOn(backlog);
-
-            Assert.That(team.Statistics.ThroughputRate, Is.EqualTo(2));
-        }
-
-        [Test]
         public void TeamCanDistributeWorkAcrossProgrammersForDay()
         {
             var programmerA = Create.Programmer.WithSkill("A");

@@ -54,7 +54,7 @@ namespace Domain.Test
 
             var backlogItem = backlog.Items.Single();
 
-            Assert.AreEqual(new Component("A"), backlogItem.Components.Single());
+            Assert.AreEqual(new Component("A"), backlogItem.FindComponentFor(new Skill("A")));
         }
 
         [Test]
@@ -68,8 +68,8 @@ namespace Domain.Test
 
             var backlogItem = backlog.Items.Single();
 
-            Assert.AreEqual(new Component("A"), backlogItem.Components.First());
-            Assert.AreEqual(new Component("B"), backlogItem.Components.ElementAt(1));
+            Assert.AreEqual(new Component("A"), backlogItem.FindComponentFor(new Skill("A")));
+            Assert.AreEqual(new Component("B"), backlogItem.FindComponentFor(new Skill("B")));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Domain
         }
 
         public IList<BacklogItem> Items { get; }
-        public bool HasItemsToDo => Items.Any(pbi => !pbi.Components.ToList().TrueForAll(c => c.IsTaken));
+        public bool HasItemsToDo => Items.Any(pbi => pbi.HasComponentToDo);
 
         public void Add(BacklogItem backlogItem)
         {
