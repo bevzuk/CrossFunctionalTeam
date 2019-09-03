@@ -11,6 +11,11 @@ namespace Domain
         public double ThroughputRate { get; }
         public double LeadTime { get; }
 
+        public override string ToString()
+        {
+            return $"TR: {ThroughputRate}, LT: {LeadTime}";
+        }
+
         #region Equality members
 
         private bool Equals(Statistics other)

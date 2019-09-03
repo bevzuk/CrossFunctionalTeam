@@ -5,13 +5,13 @@ namespace Domain.Test.DSL
         private BacklogItem backlogItem = new BacklogItem(string.Empty, Component.None);
         private Component component = Component.None;
 
-        public WorkItemBuilder WithBacklogItem(string name, string componentName)
+        public WorkItemBuilder ForBacklogItem(string name)
         {
-            backlogItem = new BacklogItem(name, new Component(componentName));
+            backlogItem = new BacklogItem(name, Component.None);
             return this;
         }
 
-        public WorkItemBuilder WithComponent(string name)
+        public WorkItemBuilder WorkOnComponent(string name)
         {
             component = new Component(name);
             return this;

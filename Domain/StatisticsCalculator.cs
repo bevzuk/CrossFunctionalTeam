@@ -4,9 +4,9 @@ namespace Domain
 {
     public class StatisticsCalculator
     {
-        public Statistics Calculate(IEnumerable<ScheduleData> scheduleData)
+        public Statistics Calculate(IList<ScheduleData> scheduleData)
         {
-            return new Statistics(1, 1);
+            return new Statistics(1f / scheduleData.Count, scheduleData.Count);
         }
     }
 }
