@@ -2,14 +2,14 @@ namespace Domain
 {
     public class Statistics
     {
-        public Statistics(double throughputRate, double leadTime)
+        public Statistics(decimal throughputRate, decimal leadTime)
         {
             ThroughputRate = throughputRate;
             LeadTime = leadTime;
         }
 
-        public double ThroughputRate { get; }
-        public double LeadTime { get; }
+        public decimal ThroughputRate { get; }
+        public decimal LeadTime { get; }
 
         public override string ToString()
         {
