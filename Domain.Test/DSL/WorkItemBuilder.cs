@@ -17,6 +17,12 @@ namespace Domain.Test.DSL
             return this;
         }
 
+        public WorkItemBuilder NoWork()
+        {
+            component = Component.None;
+            return this;
+        }
+
         public static implicit operator WorkItem(WorkItemBuilder builder)
         {
             return new WorkItem(builder.backlogItem, builder.component);
