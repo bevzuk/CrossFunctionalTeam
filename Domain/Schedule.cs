@@ -35,7 +35,7 @@ namespace Domain
 
         public Statistics CalculateStatistics()
         {
-            return new Statistics(1, 1);
+            return new StatisticsCalculator().Calculate(data);
         }
     }
 }

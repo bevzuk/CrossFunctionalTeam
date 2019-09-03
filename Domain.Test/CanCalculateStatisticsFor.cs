@@ -6,17 +6,16 @@ namespace Domain.Test
     public class CanCalculateStatisticsFor
     {
         [Test]
-        public void OneBacklogItem_OneComponent_OneProgrammer()
+        public void OneBacklogItem_OneComponent()
         {
-            var team = Create.Team.WithProgrammer("Homer", "A");
-            var backlog = Create.Backlog
-                .WithItem("US1", "A");
-            var schedule = new Schedule(backlog, team);
-            
-            var statistics = schedule.CalculateStatistics();
+            var scheduleData = new[]
+            {
+                new ScheduleData(1, Create.WorkItem.WithBacklogItem("US1", "A").WithComponent("A"))
+            };
 
-            Assert.That(statistics.ThroughputRate, Is.EqualTo(1));
-            Assert.That(statistics.LeadTime, Is.EqualTo(1));
+            var statistics = new StatisticsCalculator().Calculate(scheduleData);
+
+            Assert.That(statistics, Is.EqualTo(new Statistics(1, 1)));
         }
     }
 }
