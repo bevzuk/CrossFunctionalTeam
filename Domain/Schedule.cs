@@ -32,5 +32,10 @@ namespace Domain
                     data.Add(new ScheduleData(day, teamMember.WorkItem));
             }
         }
+
+        public Statistics CalculateStatistics()
+        {
+            return new Statistics(1, 1);
+        }
     }
 }
