@@ -16,7 +16,7 @@ namespace Domain
 
         public Component FindComponentFor(Skill skill)
         {
-            return components.FirstOrDefault(_ => _.Name == skill.Name && !_.IsTaken);
+            return components.FirstOrDefault(_ => _.Name == skill.Name && !_.IsTaken) ?? Component.None;
         }
 
         private bool Equals(Components other)

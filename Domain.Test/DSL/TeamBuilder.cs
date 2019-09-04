@@ -1,8 +1,10 @@
+using Domain.TeamWorkStrategy;
+
 namespace Domain.Test.DSL
 {
     public class TeamBuilder
     {
-        public Team Please { get; } = new Team();
+        public Team Please { get; } = new Team(new DoWhateverICanTeamWorkStrategy());
 
         public TeamBuilder With(params Programmer[] programmers)
         {

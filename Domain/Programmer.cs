@@ -18,31 +18,13 @@ namespace Domain
             Skill = skill;
         }
 
-        public void ChooseWorkFrom(Backlog backlog)
-        {
-            foreach (var backlogItem in backlog.Items)
-            {
-                ChooseWorkFrom(backlogItem);
-                if (!Equals(WorkItem.Component, Component.None)) return;
-            }
-        }
-
-        public void ChooseWorkFrom(BacklogItem backlogItem)
-        {
-            var componentToWork = backlogItem.FindComponentFor(Skill);
-            if (componentToWork != null)
-                WorkOn(backlogItem, componentToWork);
-            else
-                DoNothing();
-        }
-
-        private void WorkOn(BacklogItem backlogItem, Component component)
+        public void WorkOn(BacklogItem backlogItem, Component component)
         {
             WorkItem = new WorkItem(backlogItem, component);
             component.Take();
         }
 
-        private void DoNothing()
+        public void DoNothing()
         {
             WorkOn(BacklogItem.None, Component.None);
         }

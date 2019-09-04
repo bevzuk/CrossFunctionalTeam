@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Domain.Test.DSL
 {
     public class WorkItemBuilder
@@ -5,9 +7,11 @@ namespace Domain.Test.DSL
         private BacklogItem backlogItem = new BacklogItem(string.Empty, Component.None);
         private Component component = Component.None;
 
-        public WorkItemBuilder ForBacklogItem(string name)
+        public WorkItem Please => this;
+
+        public WorkItemBuilder ForBacklogItem(string name, params string[] componentNames)
         {
-            backlogItem = new BacklogItem(name, Component.None);
+            backlogItem = new BacklogItem(name, componentNames.Select(_ => new Component(_)).ToArray());
             return this;
         }
 
