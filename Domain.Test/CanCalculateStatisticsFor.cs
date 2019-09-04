@@ -123,7 +123,7 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario1()
+        public void Scenario1_SpecialistsTeam()
         {
             var team = Create.Team
                 .WithProgrammer("Homer", "A")
@@ -139,6 +139,25 @@ namespace Domain.Test
             var statistics = schedule.CalculateStatistics();
 
             Assert.That(statistics, Is.EqualTo(new Statistics(4 / 6m, 3.25m)));
+        }
+
+        [Test]
+        public void Scenario2_TeamWithTShapeProgrammers()
+        {
+            var team = Create.Team
+                .WithProgrammer("Homer", "A", "B")
+                .WithProgrammer("Marge", "A", "B")
+                .WithProgrammer("Bart", "C");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A", "A", "B")
+                .WithItem("US2", "A", "B", "B")
+                .WithItem("US3", "A", "B", "C")
+                .WithItem("US4", "B", "B", "C");
+            var schedule = new Schedule(backlog, team);
+
+            var statistics = schedule.CalculateStatistics();
+
+            Assert.That(statistics, Is.EqualTo(new Statistics(4 / 5m, 3m)));
         }
     }
 }

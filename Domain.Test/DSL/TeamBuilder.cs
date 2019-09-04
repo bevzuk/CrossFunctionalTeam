@@ -9,7 +9,6 @@ namespace Domain.Test.DSL
         public TeamBuilder With(params Programmer[] programmers)
         {
             foreach (var programmer in programmers) Please.Add(programmer);
-
             return this;
         }
 

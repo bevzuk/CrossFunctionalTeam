@@ -84,7 +84,7 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario1()
+        public void Scenario1_SpecialistsTeam()
         {
             var team = Create.Team
                 .WithProgrammer("Homer", "A")
@@ -109,7 +109,7 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario2()
+        public void Scenario2_TeamWithTShapeProgrammers()
         {
             var team = Create.Team
                 .WithProgrammer("Homer", "A", "B")
