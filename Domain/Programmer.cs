@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Domain
 {
     public class Programmer
@@ -5,17 +7,18 @@ namespace Domain
         public Programmer(string name = "")
         {
             Name = name;
+            Skills = new List<Skill>();
         }
 
         public string Name { get; }
 
-        public Skill Skill { get; private set; }
+        public List<Skill> Skills { get; }
 
         public WorkItem WorkItem { get; private set; }
 
         public void Learn(Skill skill)
         {
-            Skill = skill;
+            Skills.Add(skill);
         }
 
         public void WorkOn(BacklogItem backlogItem, Component component)

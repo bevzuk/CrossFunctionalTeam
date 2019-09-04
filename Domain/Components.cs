@@ -21,7 +21,6 @@ namespace Domain
 
         private bool Equals(Components other)
         {
-            var collectionsAreEqual = true;
             if (components.Count != other.components.Count) return false;
             for (var i = 0; i < components.Count; i++)
                 if (!components[i].Equals(other.components[i]))

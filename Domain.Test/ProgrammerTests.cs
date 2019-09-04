@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 namespace Domain.Test
@@ -11,7 +12,7 @@ namespace Domain.Test
 
             programmer.Learn(new Skill("A"));
 
-            Assert.AreEqual(new Skill("A"), programmer.Skill);
+            Assert.AreEqual(new Skill("A"), programmer.Skills.Single());
         }
 
         [Test]
@@ -21,7 +22,7 @@ namespace Domain.Test
 
             programmer.Learn(new Skill("B"));
 
-            Assert.AreEqual(new Skill("B"), programmer.Skill);
+            Assert.AreEqual(new Skill("B"), programmer.Skills.Single());
         }
     }
 }

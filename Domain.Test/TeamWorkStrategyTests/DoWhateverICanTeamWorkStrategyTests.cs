@@ -9,7 +9,7 @@ namespace Domain.Test.TeamWorkStrategyTests
         [Test]
         public void CanChooseWork()
         {
-            var programmer = Create.Programmer.WithSkill("A");
+            var programmer = Create.Programmer.WithSkill("A").Please;
             var backlog = Create.Backlog.WithItem("US1", "A", "B");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 
@@ -21,7 +21,7 @@ namespace Domain.Test.TeamWorkStrategyTests
         [Test]
         public void CanChooseSecondItem()
         {
-            var programmer = Create.Programmer.WithSkill("A");
+            var programmer = Create.Programmer.WithSkill("A").Please;
             var backlog = Create.Backlog
                 .WithItem("US1", "B")
                 .WithItem("US2", "A");
@@ -36,7 +36,7 @@ namespace Domain.Test.TeamWorkStrategyTests
         [Test]
         public void WhenNoWork_DoNothing()
         {
-            var programmer = Create.Programmer.WithSkill("A");
+            var programmer = Create.Programmer.WithSkill("A").Please;
             var backlog = Create.Backlog.WithItem("US1", "B");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 
@@ -48,8 +48,8 @@ namespace Domain.Test.TeamWorkStrategyTests
         [Test]
         public void When2ProgrammersDo1PBI_Programmer2HasDoesNothing()
         {
-            var programmer1 = Create.Programmer.WithSkill("A");
-            var programmer2 = Create.Programmer.WithSkill("A");
+            var programmer1 = Create.Programmer.WithSkill("A").Please;
+            var programmer2 = Create.Programmer.WithSkill("A").Please;
             var backlog = Create.Backlog.WithItem("US1", "A");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 

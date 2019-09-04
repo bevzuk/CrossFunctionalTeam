@@ -5,8 +5,9 @@ namespace Domain.TeamWorkStrategy
         public void ChooseWork(Backlog backlog, Programmer programmer)
         {
             foreach (var backlogItem in backlog.Items)
+            foreach (var skill in programmer.Skills)
             {
-                var componentToWork = backlogItem.FindComponentFor(programmer.Skill);
+                var componentToWork = backlogItem.FindComponentFor(skill);
                 if (componentToWork != Component.None)
                 {
                     programmer.WorkOn(backlogItem, componentToWork);
