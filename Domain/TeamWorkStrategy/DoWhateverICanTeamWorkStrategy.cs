@@ -2,20 +2,29 @@ namespace Domain.TeamWorkStrategy
 {
     public class DoWhateverICanTeamWorkStrategy : ITeamWorkStrategy
     {
-        public void ChooseWork(Backlog backlog, Programmer programmer)
+        public void DistributeWork(Backlog backlog, Team team)
+        {
+            foreach (var programmer in team.Members) ChooseWork(backlog, programmer);
+        }
+
+        private void ChooseWork(Backlog backlog, Programmer programmer)
         {
             foreach (var backlogItem in backlog.Items)
-            foreach (var skill in programmer.Skills)
             {
-                var componentToWork = backlogItem.FindComponentFor(skill);
-                if (componentToWork != Component.None)
+                if (programmer.HasSkillsFor(backlogItem))
                 {
-                    programmer.WorkOn(backlogItem, componentToWork);
+                    Work(programmer, backlogItem);
                     return;
                 }
-            }
 
-            programmer.DoNothing();
+                programmer.DoNothing();
+            }
+        }
+
+        private void Work(Programmer programmer, BacklogItem backlogItem)
+        {
+            var componentToWork = backlogItem.FindComponentFor(programmer.Skills);
+            programmer.WorkOn(backlogItem, componentToWork);
         }
     }
 }

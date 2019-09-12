@@ -10,10 +10,11 @@ namespace Domain.Test.TeamWorkStrategyTests
         public void CanChooseWork()
         {
             var programmer = Create.Programmer.WithSkill("A").Please;
+            var team = Create.Team.With(programmer);
             var backlog = Create.Backlog.WithItem("US1", "A", "B");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 
-            teamWorkStrategy.ChooseWork(backlog, programmer);
+            teamWorkStrategy.DistributeWork(backlog, team);
 
             Assert.AreEqual(new Component("A"), programmer.WorkItem.Component);
         }
@@ -22,12 +23,13 @@ namespace Domain.Test.TeamWorkStrategyTests
         public void CanChooseSecondItem()
         {
             var programmer = Create.Programmer.WithSkill("A").Please;
+            var team = Create.Team.With(programmer);
             var backlog = Create.Backlog
                 .WithItem("US1", "B")
                 .WithItem("US2", "A");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 
-            teamWorkStrategy.ChooseWork(backlog, programmer);
+            teamWorkStrategy.DistributeWork(backlog, team);
 
             Assert.AreEqual(Create.WorkItem.ForBacklogItem("US2", "A").WorkOnComponent("A").Please,
                 programmer.WorkItem);
@@ -37,10 +39,11 @@ namespace Domain.Test.TeamWorkStrategyTests
         public void WhenNoWork_DoNothing()
         {
             var programmer = Create.Programmer.WithSkill("A").Please;
+            var team = Create.Team.With(programmer);
             var backlog = Create.Backlog.WithItem("US1", "B");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 
-            teamWorkStrategy.ChooseWork(backlog, programmer);
+            teamWorkStrategy.DistributeWork(backlog, team);
 
             Assert.AreEqual(Component.None, programmer.WorkItem.Component);
         }
@@ -50,11 +53,11 @@ namespace Domain.Test.TeamWorkStrategyTests
         {
             var programmer1 = Create.Programmer.WithSkill("A").Please;
             var programmer2 = Create.Programmer.WithSkill("A").Please;
+            var team = Create.Team.With(programmer1, programmer2);
             var backlog = Create.Backlog.WithItem("US1", "A");
             var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
 
-            teamWorkStrategy.ChooseWork(backlog, programmer1);
-            teamWorkStrategy.ChooseWork(backlog, programmer2);
+            teamWorkStrategy.DistributeWork(backlog, team);
 
             Assert.AreEqual(new Component("A"), programmer1.WorkItem.Component);
             Assert.AreEqual(Component.None, programmer2.WorkItem.Component);

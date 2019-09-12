@@ -22,7 +22,7 @@ namespace Domain
 
         public void DistributeWork(Backlog backlog)
         {
-            foreach (var programmer in Members) teamWorkStrategy.ChooseWork(backlog, programmer);
+            teamWorkStrategy.DistributeWork(backlog, this);
         }
     }
 }

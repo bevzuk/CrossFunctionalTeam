@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Domain
 {
     public class BacklogItem
@@ -14,6 +16,16 @@ namespace Domain
         public bool HasComponentToDo => components.HasComponentToDo;
 
         public static BacklogItem None => new BacklogItem(string.Empty);
+
+        public Component FindComponentFor(IEnumerable<Skill> skills)
+        {
+            foreach (var skill in skills)
+            {
+                var component = FindComponentFor(skill);
+                if (component != Component.None) return component;
+            }
+            return Component.None;
+        }
 
         public Component FindComponentFor(Skill skill)
         {

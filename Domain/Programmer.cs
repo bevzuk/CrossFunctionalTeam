@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain
 {
@@ -30,6 +31,13 @@ namespace Domain
         public void DoNothing()
         {
             WorkOn(BacklogItem.None, Component.None);
+        }
+
+        public bool HasSkillsFor(BacklogItem backlogItem)
+        {
+            return Skills
+                .Select(backlogItem.FindComponentFor)
+                .Any(componentToWork => componentToWork != Component.None);
         }
     }
 }
