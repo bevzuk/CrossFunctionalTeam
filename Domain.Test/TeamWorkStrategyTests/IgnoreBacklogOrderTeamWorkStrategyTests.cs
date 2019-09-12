@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Domain.Test.TeamWorkStrategyTests
 {
-    public class DoWhateverICanTeamWorkStrategyTests
+    public class IgnoreBacklogOrderTeamWorkStrategyTests
     {
         [Test]
         public void CanChooseWork()
