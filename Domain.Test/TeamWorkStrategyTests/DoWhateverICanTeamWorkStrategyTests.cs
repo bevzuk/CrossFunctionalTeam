@@ -12,7 +12,7 @@ namespace Domain.Test.TeamWorkStrategyTests
             var programmer = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer);
             var backlog = Create.Backlog.WithItem("US1", "A", "B");
-            var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
+            var teamWorkStrategy = new IgnoreBacklogOrderTeamWorkStrategy();
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
@@ -27,7 +27,7 @@ namespace Domain.Test.TeamWorkStrategyTests
             var backlog = Create.Backlog
                 .WithItem("US1", "B")
                 .WithItem("US2", "A");
-            var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
+            var teamWorkStrategy = new IgnoreBacklogOrderTeamWorkStrategy();
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
@@ -41,7 +41,7 @@ namespace Domain.Test.TeamWorkStrategyTests
             var programmer = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer);
             var backlog = Create.Backlog.WithItem("US1", "B");
-            var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
+            var teamWorkStrategy = new IgnoreBacklogOrderTeamWorkStrategy();
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
@@ -55,7 +55,7 @@ namespace Domain.Test.TeamWorkStrategyTests
             var programmer2 = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer1, programmer2);
             var backlog = Create.Backlog.WithItem("US1", "A");
-            var teamWorkStrategy = new DoWhateverICanTeamWorkStrategy();
+            var teamWorkStrategy = new IgnoreBacklogOrderTeamWorkStrategy();
 
             teamWorkStrategy.DistributeWork(backlog, team);
 

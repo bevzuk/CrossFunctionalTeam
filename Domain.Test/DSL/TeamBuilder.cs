@@ -4,7 +4,7 @@ namespace Domain.Test.DSL
 {
     public class TeamBuilder
     {
-        public Team Please { get; } = new Team(new DoWhateverICanTeamWorkStrategy());
+        public Team Please { get; } = new Team(new IgnoreBacklogOrderTeamWorkStrategy());
 
         public TeamBuilder With(params Programmer[] programmers)
         {

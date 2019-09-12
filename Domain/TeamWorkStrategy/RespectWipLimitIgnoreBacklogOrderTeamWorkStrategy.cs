@@ -1,13 +1,10 @@
-using System;
-using System.Linq;
-
 namespace Domain.TeamWorkStrategy
 {
-    public class WipLimitKeepOrderTeamWorkStrategy : RespectBacklogOrderTeamStrategy, ITeamWorkStrategy
+    public class RespectWipLimitIgnoreBacklogOrderTeamWorkStrategy : IgnoreBacklogOrderTeamWorkStrategy
     {
         private readonly int wipLimit;
 
-        public WipLimitKeepOrderTeamWorkStrategy(int wipLimit)
+        public RespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(int wipLimit)
         {
             this.wipLimit = wipLimit;
         }
