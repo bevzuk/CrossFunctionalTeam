@@ -21,7 +21,7 @@ namespace Domain.TeamWorkStrategy
                 }
 
                 ChooseWork(backlog, programmer);
-                if (programmer.WorkItem.Component != Component.None) remainingWork--;
+                if (programmer.IsWorking) remainingWork--;
             }
         }
     }

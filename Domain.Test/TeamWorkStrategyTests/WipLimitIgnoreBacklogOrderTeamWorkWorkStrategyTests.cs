@@ -20,7 +20,7 @@ namespace Domain.Test.TeamWorkStrategyTests
             teamWorkStrategy.DistributeWork(backlog, team);
 
             Assert.That(homer.WorkItem, Looks.LikeWorkItem("US1.A"));
-            Assert.That(marge.WorkItem, Looks.LikeWorkItem("."));
+            Assert.False(marge.IsWorking);
         }
         
         [Test]

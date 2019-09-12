@@ -16,6 +16,7 @@ namespace Domain
         public List<Skill> Skills { get; }
 
         public WorkItem WorkItem { get; private set; }
+        public bool IsWorking => WorkItem.Component != Component.None;
 
         public void Learn(Skill skill)
         {

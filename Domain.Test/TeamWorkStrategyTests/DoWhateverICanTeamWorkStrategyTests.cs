@@ -16,7 +16,7 @@ namespace Domain.Test.TeamWorkStrategyTests
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
-            Assert.AreEqual(new Component("A"), programmer.WorkItem.Component);
+            Assert.That(programmer.WorkItem, Looks.LikeWorkItem("US1.A"));
         }
 
         [Test]
@@ -31,8 +31,7 @@ namespace Domain.Test.TeamWorkStrategyTests
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
-            Assert.AreEqual(Create.WorkItem.ForBacklogItem("US2", "A").WorkOnComponent("A").Please,
-                programmer.WorkItem);
+            Assert.That(programmer.WorkItem, Looks.LikeWorkItem("US2.A"));
         }
 
         [Test]
@@ -45,7 +44,7 @@ namespace Domain.Test.TeamWorkStrategyTests
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
-            Assert.AreEqual(Component.None, programmer.WorkItem.Component);
+            Assert.False(programmer.IsWorking);
         }
 
         [Test]
@@ -59,8 +58,8 @@ namespace Domain.Test.TeamWorkStrategyTests
 
             teamWorkStrategy.DistributeWork(backlog, team);
 
-            Assert.AreEqual(new Component("A"), programmer1.WorkItem.Component);
-            Assert.AreEqual(Component.None, programmer2.WorkItem.Component);
+            Assert.That(programmer1.WorkItem, Looks.LikeWorkItem("US1.A"));
+            Assert.False(programmer2.IsWorking);
         }
     }
 }
