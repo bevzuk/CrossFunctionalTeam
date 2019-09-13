@@ -131,5 +131,71 @@ namespace Domain.Test
                 | 4 | US3.A | US3.B | .     |
                 | 5 | US4.B | US4.B | .     |"));
         }
+
+        [Test]
+        public void TeamRespectingWipLimit()
+        {
+            var team = Create.Team
+                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+                .WithProgrammer("Homer", "A")
+                .WithProgrammer("Marge", "B")
+                .WithProgrammer("Bart", "C");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A")
+                .WithItem("US2", "B")
+                .WithItem("US3", "C");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge | Bart  |
+                | 1 | US1.A | US2.B | .     |
+                | 2 | .     | .     | US3.C |"));
+        }
+
+        [Test]
+        public void TeamRespectingWipLimit_For2Components()
+        {
+            var team = Create.Team
+                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+                .WithProgrammer("Homer", "A")
+                .WithProgrammer("Marge", "A")
+                .WithProgrammer("Bart", "A");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A", "A")
+                .WithItem("US2", "A");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge | Bart  |
+                | 1 | US1.A | US1.A | US2.A |"));
+        }
+
+        [Test]
+        [Ignore("Not ready")]
+        public void Scenario3_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder()
+        {
+            var team = Create.Team
+                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+                .WithProgrammer("Homer", "A", "B")
+                .WithProgrammer("Marge", "A", "B")
+                .WithProgrammer("Bart", "C");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A", "A", "B")
+                .WithItem("US2", "A", "B", "B")
+                .WithItem("US3", "A", "B", "C")
+                .WithItem("US4", "B", "B", "C");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge | Bart  |
+                | 1 | US1.A | US1.A | US3.C |
+                | 2 | US1.B | US3.A | .     |
+                | 3 | US4.B | US3.B | US4.C |
+                | 4 | US4.B | US2.A | .     |
+                | 5 | US2.B | US2.B | .     |"));
+        }
     }
 }

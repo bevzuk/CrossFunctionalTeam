@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Domain.TeamWorkStrategy
 {
     public class RespectWipLimitIgnoreBacklogOrderTeamWorkStrategy : IgnoreBacklogOrderTeamWorkStrategy
@@ -9,20 +11,26 @@ namespace Domain.TeamWorkStrategy
             this.wipLimit = wipLimit;
         }
 
-        public void DistributeWork(Backlog backlog, Team team)
+        public override void DistributeWork(Backlog backlog, Team team)
         {
-            var remainingWork = wipLimit;
+            foreach (var programmer in team.Members) programmer.DoNothing();
+
+            if (wipLimit <= Wip(team)) return;
+
             foreach (var programmer in team.Members)
             {
-                if (remainingWork == 0)
-                {
-                    programmer.DoNothing();
-                    continue;
-                }
-
                 ChooseWork(backlog, programmer);
-                if (programmer.IsWorking) remainingWork--;
+                if (wipLimit <= Wip(team)) return;
             }
+        }
+
+        private int Wip(Team team)
+        {
+            return team.Members
+                .Where(_ => _.IsWorking)
+                .Select(_ => _.WorkItem.BacklogItem.Name)
+                .Distinct()
+                .Count();
         }
     }
 }
