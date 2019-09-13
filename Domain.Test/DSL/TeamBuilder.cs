@@ -1,14 +1,32 @@
+using System.Collections.Generic;
 using Domain.TeamWorkStrategy;
 
 namespace Domain.Test.DSL
 {
     public class TeamBuilder
     {
-        public Team Please { get; } = new Team(new IgnoreBacklogOrderTeamWorkStrategy());
+        private ITeamWorkStrategy strategy = new IgnoreBacklogOrderTeamWorkStrategy();
+        private readonly List<Programmer> programmers = new List<Programmer>();
+        
+        public Team Please
+        {
+            get
+            {
+                var team = new Team(strategy);
+                team.Add(programmers.ToArray());
+                return team;
+            }
+        }
+
+        public TeamBuilder WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(int wipLimit)
+        {
+            strategy = new RespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(wipLimit);
+            return this;
+        }
 
         public TeamBuilder With(params Programmer[] programmers)
         {
-            foreach (var programmer in programmers) Please.Add(programmer);
+            this.programmers.AddRange(programmers);
             return this;
         }
 
@@ -16,7 +34,7 @@ namespace Domain.Test.DSL
         {
             var programmer = new Programmer(name);
             foreach (var skillName in skills) programmer.Learn(new Skill(skillName));
-            Please.Add(programmer);
+            programmers.Add(programmer);
             return this;
         }
 

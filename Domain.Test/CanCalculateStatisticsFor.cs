@@ -159,5 +159,25 @@ namespace Domain.Test
 
             Assert.That(statistics, Is.EqualTo(new Statistics(4 / 5m, 3m)));
         }
+
+        [Test, Ignore("Not ready yet")]
+        public void Scenario4_TeamWithTShapeProgrammers_WipLimit2_IgnoreBacklogOrder()
+        {
+            var team = Create.Team
+                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(wipLimit: 2)
+                .WithProgrammer("Homer", "A", "B")
+                .WithProgrammer("Marge", "A", "B")
+                .WithProgrammer("Bart", "C");
+            var backlog = Create.Backlog
+                .WithItem("US1", "A", "A", "B")
+                .WithItem("US2", "A", "B", "B")
+                .WithItem("US3", "A", "B", "C")
+                .WithItem("US4", "B", "B", "C");
+            var schedule = new Schedule(backlog, team);
+
+            var statistics = schedule.CalculateStatistics();
+
+            Assert.That(statistics, Is.EqualTo(new Statistics(4 / 5m, 2.25m)));
+        }
     }
 }
