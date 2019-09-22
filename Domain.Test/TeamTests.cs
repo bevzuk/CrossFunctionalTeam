@@ -1,13 +1,10 @@
 using Domain.Test.DSL;
 using NUnit.Framework;
 
-namespace Domain.Test
-{
-    public class TeamTests
-    {
+namespace Domain.Test {
+    public class TeamTests {
         [Test]
-        public void CanAddProgrammer()
-        {
+        public void CanAddProgrammer() {
             var programmer = new Programmer();
             var team = Create.Team.With(programmer).Please;
 
@@ -17,8 +14,7 @@ namespace Domain.Test
         }
 
         [Test]
-        public void CanAddTwoProgrammers()
-        {
+        public void CanAddTwoProgrammers() {
             var programmer1 = new Programmer();
             var programmer2 = new Programmer();
             var team = Create.Team.With(programmer1, programmer2).Please;
@@ -29,13 +25,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TeamCanDistributeWorkAcrossProgrammersForDay()
-        {
+        public void TeamCanDistributeWorkAcrossProgrammersForDay() {
             var programmerA = Create.Programmer.WithSkill("A").Please;
             var programmerB = Create.Programmer.WithSkill("B").Please;
             var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "B");
+               .WithItem("US1", "A", "B");
 
             team.DistributeWork(backlog);
 
@@ -44,14 +39,13 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TeamCanDistributeTwoBacklogItemsAcrossProgrammersForDay()
-        {
+        public void TeamCanDistributeTwoBacklogItemsAcrossProgrammersForDay() {
             var programmerA = Create.Programmer.WithSkill("A").Please;
             var programmerB = Create.Programmer.WithSkill("B").Please;
             var team = Create.Team.With(programmerA, programmerB).Please;
             var backlog = Create.Backlog
-                .WithItem("US1", "A")
-                .WithItem("US2", "B");
+               .WithItem("US1", "A")
+               .WithItem("US2", "B");
 
             team.DistributeWork(backlog);
 
@@ -60,15 +54,14 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TeamCanDistributeThreeBacklogItemsAcrossThreeProgrammers()
-        {
+        public void TeamCanDistributeThreeBacklogItemsAcrossThreeProgrammers() {
             var programmerA = Create.Programmer.WithSkill("A").Please;
             var programmerB = Create.Programmer.WithSkill("B").Please;
             var programmerC = Create.Programmer.WithSkill("C").Please;
             var team = Create.Team.With(programmerA, programmerB, programmerC).Please;
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "B")
-                .WithItem("US2", "C");
+               .WithItem("US1", "A", "B")
+               .WithItem("US2", "C");
 
             team.DistributeWork(backlog);
 
@@ -79,13 +72,12 @@ namespace Domain.Test
 
 
         [Test]
-        public void SecondWorkDistribution_DistributesSecondWorkItem()
-        {
+        public void SecondWorkDistribution_DistributesSecondWorkItem() {
             var homer = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(homer).Please;
             var backlog = Create.Backlog
-                .WithItem("US1", "A")
-                .WithItem("US2", "A");
+               .WithItem("US1", "A")
+               .WithItem("US2", "A");
 
             team.DistributeWork(backlog);
             team.DistributeWork(backlog);
@@ -94,13 +86,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TShapedTeam_CanWorkOnMultipleComponents()
-        {
+        public void TShapedTeam_CanWorkOnMultipleComponents() {
             var homer = Create.Programmer.WithSkills("A", "B").Please;
             var marge = Create.Programmer.WithSkills("A", "B").Please;
             var team = Create.Team.With(homer, marge).Please;
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "B");
+               .WithItem("US1", "A", "B");
 
             team.DistributeWork(backlog);
 

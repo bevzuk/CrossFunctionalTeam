@@ -1,45 +1,37 @@
 using System.Collections.Generic;
 using Domain.TeamWorkStrategy;
 
-namespace Domain.Test.DSL
-{
-    public class TeamBuilder
-    {
+namespace Domain.Test.DSL {
+    public class TeamBuilder {
         private ITeamWorkStrategy strategy = new IgnoreBacklogOrderTeamWorkStrategy();
         private readonly List<Programmer> programmers = new List<Programmer>();
-        
-        public Team Please
-        {
-            get
-            {
+
+        public Team Please {
+            get {
                 var team = new Team(strategy);
                 team.Add(programmers.ToArray());
                 return team;
             }
         }
 
-        public TeamBuilder WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(int wipLimit)
-        {
+        public TeamBuilder WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(int wipLimit) {
             strategy = new RespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(wipLimit);
             return this;
         }
 
-        public TeamBuilder With(params Programmer[] programmers)
-        {
+        public TeamBuilder With(params Programmer[] programmers) {
             this.programmers.AddRange(programmers);
             return this;
         }
 
-        public TeamBuilder WithProgrammer(string name, params string[] skills)
-        {
+        public TeamBuilder WithProgrammer(string name, params string[] skills) {
             var programmer = new Programmer(name);
             foreach (var skillName in skills) programmer.Learn(new Skill(skillName));
             programmers.Add(programmer);
             return this;
         }
 
-        public static implicit operator Team(TeamBuilder builder)
-        {
+        public static implicit operator Team(TeamBuilder builder) {
             return builder.Please;
         }
     }

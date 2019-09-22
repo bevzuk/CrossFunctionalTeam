@@ -1,9 +1,6 @@
-namespace Domain
-{
-    public class Component
-    {
-        public Component(string name)
-        {
+namespace Domain {
+    public class Component {
+        public Component(string name) {
             Name = name;
         }
 
@@ -12,38 +9,32 @@ namespace Domain
 
         public static Component None => new Component(string.Empty);
 
-        public void Take()
-        {
+        public void Take() {
             IsTaken = true;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return Name;
         }
 
         #region Equality members
 
-        private bool Equals(Component other)
-        {
+        private bool Equals(Component other) {
             return Name == other.Name;
         }
 
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
             return Equals((Component) obj);
         }
 
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             return Name != null ? Name.GetHashCode() : 0;
         }
 
-        public static bool operator ==(Component a, Component b)
-        {
+        public static bool operator ==(Component a, Component b) {
             if (ReferenceEquals(a, b)) return true;
             if (Equals(a, null)) return false;
             if (Equals(b, null)) return false;
@@ -51,8 +42,7 @@ namespace Domain
             return a.Equals(b);
         }
 
-        public static bool operator !=(Component a, Component b)
-        {
+        public static bool operator !=(Component a, Component b) {
             return !(a == b);
         }
 

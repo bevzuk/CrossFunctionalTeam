@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 
-namespace Domain
-{
-    public class Schedule
-    {
+namespace Domain {
+    public class Schedule {
         private readonly Backlog backlog;
 
         private readonly List<ScheduleData> data = new List<ScheduleData>();
 
         private readonly Team team;
 
-        public Schedule(Backlog backlog, Team team)
-        {
+        public Schedule(Backlog backlog, Team team) {
             this.backlog = backlog;
             this.team = team;
 
@@ -21,11 +18,9 @@ namespace Domain
         public IReadOnlyCollection<Programmer> TeamMembers => team.Members;
         public IReadOnlyCollection<ScheduleData> Data => data.AsReadOnly();
 
-        private void CalculateSchedule()
-        {
+        private void CalculateSchedule() {
             var day = 0;
-            while (backlog.HasItemsToDo)
-            {
+            while (backlog.HasItemsToDo) {
                 day++;
                 team.DistributeWork(backlog);
                 foreach (var teamMember in team.Members)
@@ -33,8 +28,7 @@ namespace Domain
             }
         }
 
-        public Statistics CalculateStatistics()
-        {
+        public Statistics CalculateStatistics() {
             return new StatisticsCalculator().Calculate(data);
         }
     }

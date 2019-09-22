@@ -1,16 +1,13 @@
 using Domain.Test.DSL;
 using NUnit.Framework;
 
-namespace Domain.Test
-{
-    public class CanBuildScheduleFor
-    {
+namespace Domain.Test {
+    public class CanBuildScheduleFor {
         [Test]
-        public void OneBacklogItem_OneComponent_OneProgrammer()
-        {
+        public void OneBacklogItem_OneComponent_OneProgrammer() {
             var team = Create.Team.WithProgrammer("Homer", "A");
             var backlog = Create.Backlog
-                .WithItem("US1", "A");
+               .WithItem("US1", "A");
 
             var schedule = new Schedule(backlog, team);
 
@@ -20,11 +17,10 @@ namespace Domain.Test
         }
 
         [Test]
-        public void OneBacklogItem_OneComponent_AnotherProgrammer()
-        {
+        public void OneBacklogItem_OneComponent_AnotherProgrammer() {
             var team = Create.Team.WithProgrammer("Homer", "B");
             var backlog = Create.Backlog
-                .WithItem("US1", "B");
+               .WithItem("US1", "B");
 
             var schedule = new Schedule(backlog, team);
 
@@ -34,13 +30,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void OneBacklogItem_TwoComponents_TwoProgrammers()
-        {
+        public void OneBacklogItem_TwoComponents_TwoProgrammers() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A")
-                .WithProgrammer("Marge", "B");
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "B");
+               .WithItem("US1", "A", "B");
 
             var schedule = new Schedule(backlog, team);
 
@@ -50,14 +45,13 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TwoBacklogItems_TwoComponents_TwoProgrammers()
-        {
+        public void TwoBacklogItems_TwoComponents_TwoProgrammers() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A")
-                .WithProgrammer("Marge", "B");
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B");
             var backlog = Create.Backlog
-                .WithItem("US1", "A")
-                .WithItem("US2", "B");
+               .WithItem("US1", "A")
+               .WithItem("US2", "B");
 
             var schedule = new Schedule(backlog, team);
 
@@ -67,13 +61,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TwoBacklogItems_OneComponent_OneProgrammer_TwoDays()
-        {
+        public void TwoBacklogItems_OneComponent_OneProgrammer_TwoDays() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A");
+               .WithProgrammer("Homer", "A");
             var backlog = Create.Backlog
-                .WithItem("US1", "A")
-                .WithItem("US2", "A");
+               .WithItem("US1", "A")
+               .WithItem("US2", "A");
 
             var schedule = new Schedule(backlog, team);
 
@@ -84,17 +77,16 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario1_SpecialistsTeam()
-        {
+        public void Scenario1_SpecialistsTeam() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A")
-                .WithProgrammer("Marge", "B")
-                .WithProgrammer("Bart", "C");
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C")
-                .WithItem("US4", "B", "B", "C");
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
 
             var schedule = new Schedule(backlog, team);
 
@@ -109,17 +101,16 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario2_TeamWithTShapeProgrammers()
-        {
+        public void Scenario2_TeamWithTShapeProgrammers() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A", "B")
-                .WithProgrammer("Marge", "A", "B")
-                .WithProgrammer("Bart", "C");
+               .WithProgrammer("Homer", "A", "B")
+               .WithProgrammer("Marge", "A", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C")
-                .WithItem("US4", "B", "B", "C");
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
 
             var schedule = new Schedule(backlog, team);
 
@@ -133,17 +124,16 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TeamRespectingWipLimit()
-        {
+        public void TeamRespectingWipLimit() {
             var team = Create.Team
-                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
-                .WithProgrammer("Homer", "A")
-                .WithProgrammer("Marge", "B")
-                .WithProgrammer("Bart", "C");
+               .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A")
-                .WithItem("US2", "B")
-                .WithItem("US3", "C");
+               .WithItem("US1", "A")
+               .WithItem("US2", "B")
+               .WithItem("US3", "C");
 
             var schedule = new Schedule(backlog, team);
 
@@ -154,16 +144,15 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TeamRespectingWipLimit_For2Components()
-        {
+        public void TeamRespectingWipLimit_For2Components() {
             var team = Create.Team
-                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
-                .WithProgrammer("Homer", "A")
-                .WithProgrammer("Marge", "A")
-                .WithProgrammer("Bart", "A");
+               .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "A")
+               .WithProgrammer("Bart", "A");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A")
-                .WithItem("US2", "A");
+               .WithItem("US1", "A", "A")
+               .WithItem("US2", "A");
 
             var schedule = new Schedule(backlog, team);
 
@@ -174,18 +163,17 @@ namespace Domain.Test
 
         [Test]
         [Ignore("Not ready")]
-        public void Scenario3_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder()
-        {
+        public void Scenario3_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder() {
             var team = Create.Team
-                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
-                .WithProgrammer("Homer", "A", "B")
-                .WithProgrammer("Marge", "A", "B")
-                .WithProgrammer("Bart", "C");
+               .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+               .WithProgrammer("Homer", "A", "B")
+               .WithProgrammer("Marge", "A", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C")
-                .WithItem("US4", "B", "B", "C");
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
 
             var schedule = new Schedule(backlog, team);
 

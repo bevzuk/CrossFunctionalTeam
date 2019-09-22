@@ -2,13 +2,10 @@ using Domain.TeamWorkStrategy;
 using Domain.Test.DSL;
 using NUnit.Framework;
 
-namespace Domain.Test.TeamWorkStrategyTests
-{
-    public class IgnoreBacklogOrderTeamWorkStrategyTests
-    {
+namespace Domain.Test.TeamWorkStrategyTests {
+    public class IgnoreBacklogOrderTeamWorkStrategyTests {
         [Test]
-        public void CanChooseWork()
-        {
+        public void CanChooseWork() {
             var programmer = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer);
             var backlog = Create.Backlog.WithItem("US1", "A", "B");
@@ -20,13 +17,12 @@ namespace Domain.Test.TeamWorkStrategyTests
         }
 
         [Test]
-        public void CanChooseSecondItem()
-        {
+        public void CanChooseSecondItem() {
             var programmer = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer);
             var backlog = Create.Backlog
-                .WithItem("US1", "B")
-                .WithItem("US2", "A");
+               .WithItem("US1", "B")
+               .WithItem("US2", "A");
             var teamWorkStrategy = new IgnoreBacklogOrderTeamWorkStrategy();
 
             teamWorkStrategy.DistributeWork(backlog, team);
@@ -35,8 +31,7 @@ namespace Domain.Test.TeamWorkStrategyTests
         }
 
         [Test]
-        public void WhenNoWork_DoNothing()
-        {
+        public void WhenNoWork_DoNothing() {
             var programmer = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer);
             var backlog = Create.Backlog.WithItem("US1", "B");
@@ -48,8 +43,7 @@ namespace Domain.Test.TeamWorkStrategyTests
         }
 
         [Test]
-        public void When2ProgrammersDo1PBI_Programmer2HasDoesNothing()
-        {
+        public void When2ProgrammersDo1PBI_Programmer2HasDoesNothing() {
             var programmer1 = Create.Programmer.WithSkill("A").Please;
             var programmer2 = Create.Programmer.WithSkill("A").Please;
             var team = Create.Team.With(programmer1, programmer2);

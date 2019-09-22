@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 
-namespace Domain
-{
-    public class BacklogItem
-    {
+namespace Domain {
+    public class BacklogItem {
         private readonly Components components;
         public readonly string Name;
 
-        public BacklogItem(string name, params Component[] components)
-        {
+        public BacklogItem(string name, params Component[] components) {
             Name = name;
             this.components = new Components(components);
         }
@@ -17,40 +14,34 @@ namespace Domain
 
         public static BacklogItem None => new BacklogItem(string.Empty);
 
-        public Component FindComponentFor(IEnumerable<Skill> skills)
-        {
-            foreach (var skill in skills)
-            {
+        public Component FindComponentFor(IEnumerable<Skill> skills) {
+            foreach (var skill in skills) {
                 var component = FindComponentFor(skill);
                 if (component != Component.None) return component;
             }
+
             return Component.None;
         }
 
-        public Component FindComponentFor(Skill skill)
-        {
+        public Component FindComponentFor(Skill skill) {
             return components.FindComponentFor(skill);
         }
 
         #region Equality members
 
-        private bool Equals(BacklogItem other)
-        {
+        private bool Equals(BacklogItem other) {
             return Name == other.Name && components.Equals(other.components);
         }
 
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
             return Equals((BacklogItem) obj);
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
+        public override int GetHashCode() {
+            unchecked {
                 return ((Name != null ? Name.GetHashCode() : 0) * 397) ^
                        (components != null ? components.GetHashCode() : 0);
             }

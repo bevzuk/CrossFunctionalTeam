@@ -1,17 +1,13 @@
 using Domain.Test.DSL;
 using NUnit.Framework;
 
-namespace Domain.Test
-{
-    public class CanCalculateStatisticsFor
-    {
+namespace Domain.Test {
+    public class CanCalculateStatisticsFor {
         [Test]
-        public void OneBacklogItem_OneDay()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A"))
-            };
+        public void OneBacklogItem_OneDay() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -19,13 +15,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void OneBacklogItem_TwoDays()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("B"))
-            };
+        public void OneBacklogItem_TwoDays() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("B"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -33,14 +28,14 @@ namespace Domain.Test
         }
 
         [Test]
-        public void OneBacklogItem_ThreeDays()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("B")),
-                new ScheduleData(3, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("C"))
-            };
+        public void OneBacklogItem_ThreeDays() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(2,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("B")),
+                                         new ScheduleData(3, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("C"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -48,13 +43,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TwoBacklogItems_OneDayEach()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
-            };
+        public void TwoBacklogItems_OneDayEach() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(2, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -62,13 +56,12 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TwoBacklogItems_InOneDay()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
-            };
+        public void TwoBacklogItems_InOneDay() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(1, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -76,15 +69,16 @@ namespace Domain.Test
         }
 
         [Test]
-        public void TwoBacklogItems_TwoDaysEach()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
-            };
+        public void TwoBacklogItems_TwoDaysEach() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(2,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B")),
+                                         new ScheduleData(2, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -92,15 +86,14 @@ namespace Domain.Test
         }
 
         [Test]
-        public void IgnoreIdleWork()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").NoWork()),
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US2").NoWork()),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
-            };
+        public void IgnoreIdleWork() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").NoWork()),
+                                         new ScheduleData(1, Create.WorkItem.ForBacklogItem("US2").NoWork()),
+                                         new ScheduleData(2, Create.WorkItem.ForBacklogItem("US2").WorkOnComponent("B"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -108,14 +101,13 @@ namespace Domain.Test
         }
 
         [Test]
-        public void IdleWorkInTheMiddle()
-        {
-            var scheduleData = new[]
-            {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
-                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").NoWork()),
-                new ScheduleData(3, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("B"))
-            };
+        public void IdleWorkInTheMiddle() {
+            var scheduleData = new[] {
+                                         new ScheduleData(1,
+                                                          Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A")),
+                                         new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").NoWork()),
+                                         new ScheduleData(3, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("B"))
+                                     };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
@@ -123,17 +115,16 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario1_SpecialistsTeam()
-        {
+        public void Scenario1_SpecialistsTeam() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A")
-                .WithProgrammer("Marge", "B")
-                .WithProgrammer("Bart", "C");
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C")
-                .WithItem("US4", "B", "B", "C");
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
             var schedule = new Schedule(backlog, team);
 
             var statistics = schedule.CalculateStatistics();
@@ -142,17 +133,16 @@ namespace Domain.Test
         }
 
         [Test]
-        public void Scenario2_TeamWithTShapeProgrammers()
-        {
+        public void Scenario2_TeamWithTShapeProgrammers() {
             var team = Create.Team
-                .WithProgrammer("Homer", "A", "B")
-                .WithProgrammer("Marge", "A", "B")
-                .WithProgrammer("Bart", "C");
+               .WithProgrammer("Homer", "A", "B")
+               .WithProgrammer("Marge", "A", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C")
-                .WithItem("US4", "B", "B", "C");
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
             var schedule = new Schedule(backlog, team);
 
             var statistics = schedule.CalculateStatistics();
@@ -161,18 +151,17 @@ namespace Domain.Test
         }
 
         [Test, Ignore("Not ready yet")]
-        public void Scenario4_TeamWithTShapeProgrammers_WipLimit2_IgnoreBacklogOrder()
-        {
+        public void Scenario4_TeamWithTShapeProgrammers_WipLimit2_IgnoreBacklogOrder() {
             var team = Create.Team
-                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(wipLimit: 2)
-                .WithProgrammer("Homer", "A", "B")
-                .WithProgrammer("Marge", "A", "B")
-                .WithProgrammer("Bart", "C");
+               .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(wipLimit: 2)
+               .WithProgrammer("Homer", "A", "B")
+               .WithProgrammer("Marge", "A", "B")
+               .WithProgrammer("Bart", "C");
             var backlog = Create.Backlog
-                .WithItem("US1", "A", "A", "B")
-                .WithItem("US2", "A", "B", "B")
-                .WithItem("US3", "A", "B", "C")
-                .WithItem("US4", "B", "B", "C");
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
             var schedule = new Schedule(backlog, team);
 
             var statistics = schedule.CalculateStatistics();

@@ -1,7 +1,5 @@
-namespace Domain.TeamWorkStrategy
-{
-    public interface ITeamWorkStrategy
-    {
+namespace Domain.TeamWorkStrategy {
+    public interface ITeamWorkStrategy {
         void DistributeWork(Backlog backlog, Team team);
     }
 }

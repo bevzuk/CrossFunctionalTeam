@@ -1,27 +1,22 @@
 using System.Collections.Generic;
 using Domain.TeamWorkStrategy;
 
-namespace Domain
-{
-    public class Team
-    {
+namespace Domain {
+    public class Team {
         private readonly List<Programmer> members = new List<Programmer>();
         private readonly ITeamWorkStrategy teamWorkStrategy;
 
-        public Team(ITeamWorkStrategy teamWorkStrategy)
-        {
+        public Team(ITeamWorkStrategy teamWorkStrategy) {
             this.teamWorkStrategy = teamWorkStrategy;
         }
 
         public IReadOnlyCollection<Programmer> Members => members.AsReadOnly();
 
-        public void Add(params Programmer[] programmers)
-        {
+        public void Add(params Programmer[] programmers) {
             members.AddRange(programmers);
         }
 
-        public void DistributeWork(Backlog backlog)
-        {
+        public void DistributeWork(Backlog backlog) {
             teamWorkStrategy.DistributeWork(backlog, this);
         }
     }
