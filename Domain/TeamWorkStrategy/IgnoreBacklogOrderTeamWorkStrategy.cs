@@ -4,7 +4,7 @@ namespace Domain.TeamWorkStrategy {
             foreach (var programmer in team.Members) ChooseWork(backlog, programmer);
         }
 
-        protected void ChooseWork(Backlog backlog, Programmer programmer) {
+        private void ChooseWork(Backlog backlog, Programmer programmer) {
             foreach (var backlogItem in backlog.Items) {
                 if (programmer.HasSkillsFor(backlogItem)) {
                     Work(programmer, backlogItem);
@@ -15,7 +15,7 @@ namespace Domain.TeamWorkStrategy {
             programmer.DoNothing();
         }
 
-        private void Work(Programmer programmer, BacklogItem backlogItem) {
+        protected void Work(Programmer programmer, BacklogItem backlogItem) {
             var componentToWork = backlogItem.FindComponentFor(programmer.Skills);
             programmer.WorkOn(backlogItem, componentToWork);
         }

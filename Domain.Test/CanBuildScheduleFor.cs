@@ -162,6 +162,22 @@ namespace Domain.Test {
         }
 
         [Test]
+        public void TeamRespectingWipLimit_ForUserStory() {
+            var team = Create.Team
+               .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(1)
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "A");
+            var backlog = Create.Backlog
+               .WithItem("US1", "A", "A");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge |
+                | 1 | US1.A | US1.A |"));
+        }
+
+        [Test]
         [Ignore("Not ready")]
         public void Scenario3_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder() {
             var team = Create.Team

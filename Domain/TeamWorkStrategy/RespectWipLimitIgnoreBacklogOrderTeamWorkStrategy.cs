@@ -13,9 +13,17 @@ namespace Domain.TeamWorkStrategy {
 
             if (wipLimit <= Wip(team)) return;
 
-            foreach (var programmer in team.Members) {
-                ChooseWork(backlog, programmer);
+            foreach (var backlogItem in backlog.Items) {
+                DistributeWork(backlogItem, team);
                 if (wipLimit <= Wip(team)) return;
+            }
+        }
+
+        private void DistributeWork(BacklogItem backlogItem, Team team) {
+            foreach (var programmer in team.Members) {
+                if (!programmer.IsWorking && programmer.HasSkillsFor(backlogItem)) {
+                    Work(programmer, backlogItem);
+                }
             }
         }
 
