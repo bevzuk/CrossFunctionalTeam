@@ -19,5 +19,9 @@ namespace Domain {
         public void DistributeWork(Backlog backlog) {
             teamWorkStrategy.DistributeWork(backlog, this);
         }
+
+        public void DoNothing() {
+            members.ForEach(_ => _.DoNothing());
+        }
     }
 }

@@ -9,9 +9,7 @@ namespace Domain.TeamWorkStrategy {
         }
 
         public override void DistributeWork(Backlog backlog, Team team) {
-            foreach (var programmer in team.Members) programmer.DoNothing();
-
-            if (wipLimit <= Wip(team)) return;
+            team.DoNothing();
 
             foreach (var backlogItem in backlog.Items) {
                 DistributeWork(backlogItem, team);
