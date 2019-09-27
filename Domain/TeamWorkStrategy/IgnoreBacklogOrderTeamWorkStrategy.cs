@@ -18,6 +18,7 @@ namespace Domain.TeamWorkStrategy {
         protected void Work(Programmer programmer, BacklogItem backlogItem) {
             var componentToWork = backlogItem.FindComponentFor(programmer.Skills);
             programmer.WorkOn(backlogItem, componentToWork);
+            backlogItem.Start();
         }
     }
 }

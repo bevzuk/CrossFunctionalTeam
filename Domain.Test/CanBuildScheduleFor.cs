@@ -176,9 +176,8 @@ namespace Domain.Test {
                 |   | Homer | Marge |
                 | 1 | US1.A | US1.A |"));
         }
-        
+
         [Test]
-        [Ignore("")]
         public void TeamRespectingWipLimit_PrefersContinueWorkingOnStartedStory() {
             var team = Create.Team
                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
