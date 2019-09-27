@@ -11,7 +11,7 @@ namespace Domain.TeamWorkStrategy {
         public override void DistributeWork(Backlog backlog, Team team) {
             team.DoNothing();
 
-            foreach (var backlogItem in backlog.ItemsStartedFirst) {
+            foreach (var backlogItem in new StartedFirstBacklog(backlog).Items) {
                 DistributeWork(backlogItem, team);
                 if (wipLimit <= Wip(team)) return;
             }

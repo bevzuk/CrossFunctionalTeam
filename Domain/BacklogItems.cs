@@ -8,9 +8,6 @@ namespace Domain {
 
         public ReadOnlyCollection<BacklogItem> Items => items.AsReadOnly();
 
-        public ReadOnlyCollection<BacklogItem> ItemsStartedFirst =>
-            items.OrderBy(_ => _.IsStarted ? 0 : 1).ToList().AsReadOnly();
-
         public bool HasItemsToDo => items.Any(pbi => pbi.HasComponentToDo);
 
         public void Add(BacklogItem backlogItem) {
