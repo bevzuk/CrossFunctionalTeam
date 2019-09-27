@@ -176,6 +176,27 @@ namespace Domain.Test {
                 |   | Homer | Marge |
                 | 1 | US1.A | US1.A |"));
         }
+        
+        [Test]
+        [Ignore("")]
+        public void TeamRespectingWipLimit_PrefersContinueWorkingOnStartedStory() {
+            var team = Create.Team
+               .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B");
+            var backlog = Create.Backlog
+               .WithItem("US1", "A")
+               .WithItem("US2", "A")
+               .WithItem("US3", "A", "B");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge |
+                | 1 | US1.A | US3.B |
+                | 2 | US3.A | .     |
+                | 3 | US2.A | .     |"));
+        }
 
         [Test]
         [Ignore("Not ready")]
