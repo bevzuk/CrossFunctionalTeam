@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Domain.TeamWorkStrategy;
 
 namespace Domain {
@@ -22,6 +23,16 @@ namespace Domain {
 
         public void DoNothing() {
             members.ForEach(_ => _.DoNothing());
+        }
+
+        public int Wip {
+            get {
+                return Members
+                   .Where(_ => _.IsWorking)
+                   .Select(_ => _.WorkItem.BacklogItem.Name)
+                   .Distinct()
+                   .Count();
+            }
         }
     }
 }

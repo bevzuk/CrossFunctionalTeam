@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Domain {
     public class Programmer {
-        public Programmer(string name = "") {
+        public Programmer(string name) {
             Name = name;
             Skills = new List<Skill>();
         }
@@ -17,13 +17,15 @@ namespace Domain {
             Skills.Add(skill);
         }
 
-        public void WorkOn(BacklogItem backlogItem, Component component) {
-            WorkItem = new WorkItem(backlogItem, component);
-            component.Take();
+        public void WorkOn(BacklogItem backlogItem) {
+            backlogItem.Start();
+            var componentToWork = backlogItem.FindComponentFor(Skills);
+            componentToWork.Take();
+            WorkItem = new WorkItem(backlogItem, componentToWork);
         }
 
         public void DoNothing() {
-            WorkOn(BacklogItem.None, Component.None);
+            WorkOn(BacklogItem.None);
         }
 
         public bool HasSkillsFor(BacklogItem backlogItem) {

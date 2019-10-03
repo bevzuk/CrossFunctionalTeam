@@ -1,11 +1,12 @@
 using System.Linq;
+using Domain.Test.DSL;
 using NUnit.Framework;
 
 namespace Domain.Test {
     public class ProgrammerTests {
         [Test]
         public void ProgrammerCanLearnSkillA() {
-            var programmer = new Programmer();
+            var programmer = Create.Programmer.Please;
 
             programmer.Learn(new Skill("A"));
 
@@ -14,7 +15,7 @@ namespace Domain.Test {
 
         [Test]
         public void ProgrammerCanLearnSkillB() {
-            var programmer = new Programmer();
+            var programmer = Create.Programmer.Please;
 
             programmer.Learn(new Skill("B"));
 

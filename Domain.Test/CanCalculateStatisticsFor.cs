@@ -150,7 +150,7 @@ namespace Domain.Test {
             Assert.That(statistics, Is.EqualTo(new Statistics(4 / 5m, 3m)));
         }
 
-        [Test, Ignore("Not ready yet")]
+        [Test]
         public void Scenario4_TeamWithTShapeProgrammers_WipLimit2_IgnoreBacklogOrder() {
             var team = Create.Team
                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(wipLimit: 2)

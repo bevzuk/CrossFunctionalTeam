@@ -5,7 +5,7 @@ namespace Domain.Test {
     public class TeamTests {
         [Test]
         public void CanAddProgrammer() {
-            var programmer = new Programmer();
+            var programmer = Create.Programmer.Please;
             var team = Create.Team.With(programmer).Please;
 
             var teamMembers = team.Members;
@@ -15,8 +15,8 @@ namespace Domain.Test {
 
         [Test]
         public void CanAddTwoProgrammers() {
-            var programmer1 = new Programmer();
-            var programmer2 = new Programmer();
+            var programmer1 = Create.Programmer.Please;
+            var programmer2 = Create.Programmer.Please;
             var team = Create.Team.With(programmer1, programmer2).Please;
 
             var teamMembers = team.Members;

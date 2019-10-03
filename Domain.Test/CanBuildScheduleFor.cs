@@ -198,7 +198,7 @@ namespace Domain.Test {
         }
 
         [Test]
-        [Ignore("Not ready")]
+//        [Ignore("Not ready")]
         public void Scenario3_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder() {
             var team = Create.Team
                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
@@ -217,9 +217,9 @@ namespace Domain.Test {
                 |   | Homer | Marge | Bart  |
                 | 1 | US1.A | US1.A | US3.C |
                 | 2 | US1.B | US3.A | .     |
-                | 3 | US4.B | US3.B | US4.C |
-                | 4 | US4.B | US2.A | .     |
-                | 5 | US2.B | US2.B | .     |"));
+                | 3 | US3.B | US2.A | .     |
+                | 4 | US2.B | US2.B | US4.C |
+                | 5 | US4.B | US4.B | .     |"));
         }
     }
 }
