@@ -19,6 +19,11 @@ namespace Domain.Test.DSL {
             return this;
         }
 
+        public TeamBuilder WithRespectWipLimitRespectBacklogOrderTeamWorkStrategy(int wipLimit) {
+            strategy = new RespectWipLimitRespectBacklogOrderTeamWorkStrategy(wipLimit);
+            return this;
+        }
+
         public TeamBuilder With(params Programmer[] programmers) {
             this.programmers.AddRange(programmers);
             return this;

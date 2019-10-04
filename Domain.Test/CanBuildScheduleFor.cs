@@ -198,8 +198,7 @@ namespace Domain.Test {
         }
 
         [Test]
-//        [Ignore("Not ready")]
-        public void Scenario3_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder() {
+        public void Scenario4_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder() {
             var team = Create.Team
                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
                .WithProgrammer("Homer", "A", "B")
@@ -220,6 +219,31 @@ namespace Domain.Test {
                 | 3 | US3.B | US2.A | .     |
                 | 4 | US2.B | US2.B | US4.C |
                 | 5 | US4.B | US4.B | .     |"));
+        }
+
+        [Test]
+        [Ignore("Not ready yet")]
+        public void Scenario3_TeamWithTShapeProgrammers_WipLimit_RespectBacklogOrder() {
+            var team = Create.Team
+               .WithRespectWipLimitRespectBacklogOrderTeamWorkStrategy(2)
+               .WithProgrammer("Homer", "A", "B")
+               .WithProgrammer("Marge", "A", "B")
+               .WithProgrammer("Bart", "C");
+            var backlog = Create.Backlog
+               .WithItem("US1", "A", "A", "B")
+               .WithItem("US2", "A", "B", "B")
+               .WithItem("US3", "A", "B", "C")
+               .WithItem("US4", "B", "B", "C");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge | Bart  |
+                | 1 | US1.A | US1.A | .     |
+                | 2 | US1.B | US2.A | .     |
+                | 3 | US2.B | US2.B | .     |
+                | 4 | US3.A | US3.B | US3.C |
+                | 5 | US4.B | US4.B | US4.C |"));
         }
     }
 }
