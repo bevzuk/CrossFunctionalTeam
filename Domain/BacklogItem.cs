@@ -55,5 +55,9 @@ namespace Domain {
         }
 
         #endregion
+
+        public void Complete() {
+            Status = BacklogItemStatus.Finished;
+        }
     }
 }

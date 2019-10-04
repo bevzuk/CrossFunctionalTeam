@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain {
     public class Backlog {
@@ -13,6 +14,12 @@ namespace Domain {
 
         public void Add(BacklogItem backlogItem) {
             backlogItems.Add(backlogItem);
+        }
+
+        public void FinishStartedWork() {
+            foreach (var backlogItem in Items.Where(_ => _.Status == BacklogItemStatus.Started)) {
+                if (!backlogItem.HasComponentToDo) backlogItem.Complete();
+            }
         }
     }
 }

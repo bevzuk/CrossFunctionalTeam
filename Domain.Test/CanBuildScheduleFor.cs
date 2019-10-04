@@ -198,6 +198,26 @@ namespace Domain.Test {
         }
 
         [Test]
+//        [Ignore("Not ready yet")]
+        public void TeamRespectingWipLimitAndBacklogOrder() {
+            var team = Create.Team
+               .WithRespectWipLimitRespectBacklogOrderTeamWorkStrategy(2)
+               .WithProgrammer("Homer", "A")
+               .WithProgrammer("Marge", "B");
+            var backlog = Create.Backlog
+               .WithItem("US1", "A")
+               .WithItem("US2", "A")
+               .WithItem("US3", "B");
+
+            var schedule = new Schedule(backlog, team);
+
+            Assert.That(schedule.AsString(), Looks.LikeSchedule(@"
+                |   | Homer | Marge |
+                | 1 | US1.A | .     |
+                | 2 | US2.A | US3.B |"));
+        }
+
+        [Test]
         public void Scenario4_TeamWithTShapeProgrammers_WipLimit_IgnoreBacklogOrder() {
             var team = Create.Team
                .WithRespectWipLimitIgnoreBacklogOrderTeamWorkStrategy(2)
@@ -222,7 +242,6 @@ namespace Domain.Test {
         }
 
         [Test]
-        [Ignore("Not ready yet")]
         public void Scenario3_TeamWithTShapeProgrammers_WipLimit_RespectBacklogOrder() {
             var team = Create.Team
                .WithRespectWipLimitRespectBacklogOrderTeamWorkStrategy(2)
@@ -241,9 +260,9 @@ namespace Domain.Test {
                 |   | Homer | Marge | Bart  |
                 | 1 | US1.A | US1.A | .     |
                 | 2 | US1.B | US2.A | .     |
-                | 3 | US2.B | US2.B | .     |
-                | 4 | US3.A | US3.B | US3.C |
-                | 5 | US4.B | US4.B | US4.C |"));
+                | 3 | US2.B | US2.B | US3.C |
+                | 4 | US3.A | US3.B | US4.C |
+                | 5 | US4.B | US4.B | .     |"));
         }
     }
 }

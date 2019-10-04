@@ -10,7 +10,7 @@ namespace Domain {
 
         public string Name { get; }
         public List<Skill> Skills { get; }
-        public WorkItem WorkItem { get; private set; }
+        public WorkItem WorkItem { get; private set; } = new WorkItem(new BacklogItem(""), Component.None);
         public bool IsWorking => WorkItem.Component != Component.None;
 
         public void Learn(Skill skill) {
