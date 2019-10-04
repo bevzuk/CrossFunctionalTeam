@@ -4,8 +4,7 @@ namespace Domain {
     public class BacklogItem {
         private readonly Components components;
         public readonly string Name;
-        public bool IsStarted => status == BacklogItemStatus.Started;
-        private BacklogItemStatus status = BacklogItemStatus.NotStarted;
+        public BacklogItemStatus Status { get; private set; } = BacklogItemStatus.NotStarted;
 
 
         public BacklogItem(string name, params Component[] components) {
@@ -31,7 +30,7 @@ namespace Domain {
         }
 
         public void StartWorkingOn(Component componentToWork) {
-            status = BacklogItemStatus.Started;
+            Status = BacklogItemStatus.Started;
             componentToWork.StartWorkingOn();
         }
 

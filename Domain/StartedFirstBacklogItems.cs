@@ -9,7 +9,7 @@ namespace Domain {
         public ReadOnlyCollection<BacklogItem> Items => items.AsReadOnly();
 
         public StartedFirstBacklogItems(IEnumerable<BacklogItem> backlogItems) {
-            items = backlogItems.OrderBy(_ => _.IsStarted ? 0 : 1).ToList();
+            items = backlogItems.OrderBy(_ => _.Status == BacklogItemStatus.Started ? 0 : 1).ToList();
         }
     }
 }
