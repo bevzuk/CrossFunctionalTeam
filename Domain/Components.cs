@@ -9,10 +9,10 @@ namespace Domain {
             this.components = new List<Component>(components);
         }
 
-        public bool HasComponentToDo => components.Any(c => !c.IsTaken);
+        public bool HasComponentToDo => components.Any(c => !c.IsStarted);
 
         public Component FindComponentFor(Skill skill) {
-            return components.FirstOrDefault(_ => _.Name == skill.Name && !_.IsTaken) ?? Component.None;
+            return components.FirstOrDefault(_ => _.Name == skill.Name && !_.IsStarted) ?? Component.None;
         }
 
         private bool Equals(Components other) {

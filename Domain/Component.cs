@@ -5,12 +5,12 @@ namespace Domain {
         }
 
         public string Name { get; }
-        public bool IsTaken { get; private set; }
+        public bool IsStarted { get; private set; }
 
         public static Component None => new Component(string.Empty);
 
-        public void Take() {
-            IsTaken = true;
+        public void StartWorkingOn() {
+            IsStarted = true;
         }
 
         public override string ToString() {

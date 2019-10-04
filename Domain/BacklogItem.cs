@@ -4,7 +4,8 @@ namespace Domain {
     public class BacklogItem {
         private readonly Components components;
         public readonly string Name;
-        public bool IsStarted { get; private set; }
+        public bool IsStarted => status == BacklogItemStatus.Started;
+        private BacklogItemStatus status = BacklogItemStatus.NotStarted;
 
 
         public BacklogItem(string name, params Component[] components) {
@@ -29,8 +30,9 @@ namespace Domain {
             return components.FindComponentFor(skill);
         }
 
-        public void Start() {
-            IsStarted = true;
+        public void StartWorkingOn(Component componentToWork) {
+            status = BacklogItemStatus.Started;
+            componentToWork.StartWorkingOn();
         }
 
         #region Equality members

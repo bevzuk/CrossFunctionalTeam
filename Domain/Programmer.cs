@@ -18,9 +18,8 @@ namespace Domain {
         }
 
         public void WorkOn(BacklogItem backlogItem) {
-            backlogItem.Start();
             var componentToWork = backlogItem.FindComponentFor(Skills);
-            componentToWork.Take();
+            backlogItem.StartWorkingOn(componentToWork);
             WorkItem = new WorkItem(backlogItem, componentToWork);
         }
 
