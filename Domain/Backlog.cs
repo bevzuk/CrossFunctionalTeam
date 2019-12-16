@@ -7,9 +7,11 @@ namespace Domain {
 
         public Backlog() {
             backlogItems = new BacklogItems();
+            Items = backlogItems.Items;
         }
 
-        public IEnumerable<BacklogItem> Items => backlogItems.Items;
+        public IEnumerable<BacklogItem> Items { get; }
+        public IEnumerable<BacklogItem> StartedFirstItems => new StartedFirstBacklogItems(Items).Items;
         public bool HasItemsToDo => backlogItems.HasItemsToDo;
 
         public void Add(BacklogItem backlogItem) {

@@ -198,7 +198,6 @@ namespace Domain.Test {
         }
 
         [Test]
-//        [Ignore("Not ready yet")]
         public void TeamRespectingWipLimitAndBacklogOrder() {
             var team = Create.Team
                .WithRespectWipLimitRespectBacklogOrderTeamWorkStrategy(2)

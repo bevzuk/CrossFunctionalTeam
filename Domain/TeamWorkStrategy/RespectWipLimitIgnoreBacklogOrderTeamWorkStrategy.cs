@@ -9,7 +9,7 @@ namespace Domain.TeamWorkStrategy {
         public void DistributeWork(Backlog backlog, Team team) {
             team.DoNothing();
 
-            foreach (var backlogItem in new StartedFirstBacklog(backlog).Items) {
+            foreach (var backlogItem in backlog.StartedFirstItems) {
                 DistributeWork(backlogItem, team);
                 if (wipLimit <= team.Wip) return;
             }
