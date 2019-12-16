@@ -12,8 +12,8 @@ namespace Domain.Test.DSL {
             return this;
         }
 
-        public ProgrammerBuilder WithSkills(params string[] skills) {
-            foreach (var skill in skills) WithSkill(skill);
+        public ProgrammerBuilder WithSkills(params string[] theSkills) {
+            foreach (var skill in theSkills) WithSkill(skill);
             return this;
         }
 

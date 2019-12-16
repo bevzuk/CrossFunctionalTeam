@@ -20,7 +20,7 @@ namespace Domain {
 
         public void FinishStartedWork() {
             foreach (var backlogItem in Items.Where(_ => _.Status == BacklogItemStatus.Started)) {
-                if (!backlogItem.HasComponentToDo) backlogItem.Complete();
+                backlogItem.Complete();
             }
         }
     }

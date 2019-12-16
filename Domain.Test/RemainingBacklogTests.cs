@@ -10,7 +10,9 @@ namespace Domain.Test {
                .WithItem("US1", "A")
                .WithItem("US2", "A")
                .Please;
-            backlog.Items.First().Complete();
+            var programmer = Create.Programmer.WithSkill("A").Please;
+            programmer.WorkOn(backlog.Items.First());
+            backlog.FinishStartedWork();
 
             var remainingBacklog = new RemainingBacklog(backlog);
 

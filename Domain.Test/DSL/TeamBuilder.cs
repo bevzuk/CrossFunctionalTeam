@@ -24,8 +24,8 @@ namespace Domain.Test.DSL {
             return this;
         }
 
-        public TeamBuilder With(params Programmer[] programmers) {
-            this.programmers.AddRange(programmers);
+        public TeamBuilder With(params Programmer[] theProgrammers) {
+            programmers.AddRange(theProgrammers);
             return this;
         }
 

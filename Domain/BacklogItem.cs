@@ -34,6 +34,10 @@ namespace Domain {
             componentToWork.StartWorkingOn();
         }
 
+        public void Complete() {
+            if (!HasComponentToDo) Status = BacklogItemStatus.Finished;
+        }
+
         #region Equality members
 
         private bool Equals(BacklogItem other) {
@@ -55,9 +59,5 @@ namespace Domain {
         }
 
         #endregion
-
-        public void Complete() {
-            Status = BacklogItemStatus.Finished;
-        }
     }
 }
