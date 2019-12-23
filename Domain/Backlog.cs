@@ -11,7 +11,6 @@ namespace Domain {
         }
 
         public IEnumerable<BacklogItem> Items { get; }
-        public IEnumerable<BacklogItem> StartedFirstItems => new StartedFirstBacklogItems(Items).Items;
         public bool HasItemsToDo => backlogItems.HasItemsToDo;
 
         public void Add(BacklogItem backlogItem) {
