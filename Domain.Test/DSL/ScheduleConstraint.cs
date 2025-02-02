@@ -15,9 +15,7 @@ namespace Domain.Test.DSL {
         }
 
         private bool AreEquivalent<TActual>(TActual actual) {
-            if (!(actual is string)) return false;
-
-            var actualSchedule = actual as string;
+            if (actual is not string actualSchedule) return false;
 
             var trimmedExpected = expected.Replace(" ", "").Trim('\n');
             var trimmedSchedule = actualSchedule.Replace(" ", "").Trim('\n');

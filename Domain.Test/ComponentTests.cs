@@ -6,7 +6,7 @@ namespace Domain.Test {
         public void ComponentIsNotEqualToNull() {
             var component = new Component("A");
 
-            Assert.False(component == null);
+            Assert.That(component, Is.Not.Null);
         }
     }
 }

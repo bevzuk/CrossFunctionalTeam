@@ -15,11 +15,9 @@ namespace Domain.Test.DSL {
         }
 
         private bool AreEquivalent<TActual>(TActual actual) {
-            if (!(actual is WorkItem)) return false;
+            if (actual is not WorkItem workItem) return false;
 
-            var actualWorkItem = actual as WorkItem;
-
-            return $"{actualWorkItem.BacklogItem.Name}.{actualWorkItem.Component.Name}" == expected;
+            return $"{workItem.BacklogItem.Name}.{workItem.Component.Name}" == expected;
         }
     }
 }
