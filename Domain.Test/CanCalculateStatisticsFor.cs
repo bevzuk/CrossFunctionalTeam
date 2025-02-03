@@ -6,12 +6,18 @@ namespace Domain.Test {
         [Test]
         public void OneBacklogItem_OneDay() {
             var scheduleData = new[] {
-                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").WorkOnComponent("A"))
+                new ScheduleData(
+                    day: 1, 
+                    workItem: Create.WorkItem
+                        .ForBacklogItem("US1")
+                        .WorkOnComponent("A")
+                )
             };
 
             var statistics = new StatisticsCalculator().Calculate(scheduleData);
 
-            Assert.That(statistics, Is.EqualTo(new Statistics(1, 1)));
+            Assert.That(statistics.ThroughputRate, Is.EqualTo(1m), "When one item is completed in one day, throughput should be 1");
+            Assert.That(statistics.LeadTime, Is.EqualTo(1m), "When item takes one day to complete, lead time should be 1");
         }
 
         [Test]
@@ -176,6 +182,27 @@ namespace Domain.Test {
             var statistics = schedule.CalculateStatistics();
 
             Assert.That(statistics, Is.EqualTo(new Statistics(4 / 5m, 2m)));
+        }
+
+        [Test]
+        public void Calculate_EmptySchedule_ThrowsException() {
+            var scheduleData = Array.Empty<ScheduleData>();
+            
+            Assert.That(() => new StatisticsCalculator().Calculate(scheduleData),
+                Throws.ArgumentException.With.Message.Contains("Schedule cannot be empty"));
+        }
+
+        [Test]
+        public void Calculate_AllWorkItemsAreIdle_ReturnsZeroStatistics() {
+            var scheduleData = new[] {
+                new ScheduleData(1, Create.WorkItem.ForBacklogItem("US1").NoWork()),
+                new ScheduleData(2, Create.WorkItem.ForBacklogItem("US1").NoWork())
+            };
+
+            var statistics = new StatisticsCalculator().Calculate(scheduleData);
+
+            Assert.That(statistics.ThroughputRate, Is.EqualTo(0m));
+            Assert.That(statistics.LeadTime, Is.EqualTo(0m));
         }
     }
 }

@@ -23,15 +23,20 @@ namespace Domain {
             return true;
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object? obj) {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((Components) obj);
+            return Equals((Components)obj);
         }
 
         public override int GetHashCode() {
-            return components != null ? components.GetHashCode() : 0;
+            if (components == null) return 0;
+            
+            unchecked {
+                return components.Aggregate(17, (current, component) => 
+                    current * 23 + (component?.GetHashCode() ?? 0));
+            }
         }
     }
 }

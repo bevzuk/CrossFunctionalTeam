@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Domain {
     public class StatisticsCalculator {
         public Statistics Calculate(IEnumerable<ScheduleData> scheduleData) {
+            if (!scheduleData.Any())
+                throw new ArgumentException("Schedule cannot be empty", nameof(scheduleData));
+
             var valuableScheduleData = scheduleData.Where(_ => _.Component != Component.None.Name);
+            if (!valuableScheduleData.Any())
+                return new Statistics(0, 0);
 
             var days = valuableScheduleData.Select(_ => _.Day).Distinct();
             var backlogItems = valuableScheduleData.Select(_ => _.BacklogItem).Distinct();
