@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Domain.Test.DSL {
     public class BacklogBuilder {
         private readonly Backlog backlog = new Backlog();

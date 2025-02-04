@@ -1,4 +1,3 @@
-using System.Linq;
 using Domain.Test.DSL;
 using NUnit.Framework;
 

@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Domain.Test.DSL {
     public class WorkItemBuilder {
         private BacklogItem backlogItem = new BacklogItem(string.Empty, Component.None);

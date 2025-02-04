@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Domain.Test.DSL {
     public class ProgrammerBuilder {
         private readonly string name = string.Empty;
