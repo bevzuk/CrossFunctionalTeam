@@ -32,5 +32,65 @@ namespace Domain.Test {
                 programmer.Skills
             );
         }
+
+        [Test]
+        public void WhenProgrammerStartsWorking_IsWorkingBecomesTrue() {
+            var programmer = Create.Programmer.Please;
+            programmer.Learn(new Skill("A"));
+            var backlogItem = new BacklogItem("US1", new Component("A"));
+
+            programmer.WorkOn(backlogItem);
+
+            Assert.That(programmer.IsWorking, Is.True);
+            Assert.That(programmer.WorkItem.BacklogItem, Is.EqualTo(backlogItem));
+            Assert.That(programmer.WorkItem.Component, Is.EqualTo(new Component("A")));
+        }
+
+        [Test]
+        public void WhenProgrammerDoesNothing_IsWorkingBecomesFalse() {
+            var programmer = Create.Programmer.Please;
+            programmer.Learn(new Skill("A"));
+            var backlogItem = new BacklogItem("US1", new Component("A"));
+            programmer.WorkOn(backlogItem);
+
+            programmer.DoNothing();
+
+            Assert.That(programmer.IsWorking, Is.False);
+            Assert.That(programmer.WorkItem.Component, Is.EqualTo(Component.None));
+        }
+
+        [Test]
+        public void WhenProgrammerHasNoRequiredSkills_CannotWorkOnBacklogItem() {
+            var programmer = Create.Programmer.Please;
+            programmer.Learn(new Skill("A"));
+            var backlogItem = new BacklogItem("US1", new Component("B"));
+
+            programmer.WorkOn(backlogItem);
+
+            Assert.That(programmer.IsWorking, Is.False);
+            Assert.That(programmer.WorkItem.Component, Is.EqualTo(Component.None));
+        }
+
+        [Test]
+        public void HasSkillsFor_ReturnsTrueWhenProgrammerHasRequiredSkill() {
+            var programmer = Create.Programmer.Please;
+            programmer.Learn(new Skill("A"));
+            var backlogItem = new BacklogItem("US1", new Component("A"));
+
+            var hasSkills = programmer.HasSkillsFor(backlogItem);
+
+            Assert.That(hasSkills, Is.True);
+        }
+
+        [Test]
+        public void HasSkillsFor_ReturnsFalseWhenProgrammerLacksRequiredSkill() {
+            var programmer = Create.Programmer.Please;
+            programmer.Learn(new Skill("A"));
+            var backlogItem = new BacklogItem("US1", new Component("B"));
+
+            var hasSkills = programmer.HasSkillsFor(backlogItem);
+
+            Assert.That(hasSkills, Is.False);
+        }
     }
 }
