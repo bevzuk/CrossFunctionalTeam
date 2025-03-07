@@ -1,15 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Domain {
-    public class Programmer {
-        public Programmer(string name) {
-            Name = name;
-            Skills = new List<Skill>();
-        }
-
-        public string Name { get; }
-        public List<Skill> Skills { get; }
+    public class Programmer(string name)
+    {
+        public string Name { get; } = name;
+        public List<Skill> Skills { get; } = [];
         public WorkItem WorkItem { get; private set; } = new WorkItem(new BacklogItem(""), Component.None);
         public bool IsWorking => WorkItem.Component != Component.None;
 
