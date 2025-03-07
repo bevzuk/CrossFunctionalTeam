@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System;
-
 namespace Domain {
     public class StatisticsCalculator {
         public Statistics Calculate(IEnumerable<ScheduleData> scheduleData) {

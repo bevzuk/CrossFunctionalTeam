@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Domain {
     public class RemainingBacklog {
