@@ -1,5 +1,7 @@
 namespace Domain {
     public class WorkItem {
+        public static WorkItem None { get; } = new WorkItem(BacklogItem.None, Component.None);
+
         public WorkItem(BacklogItem backlogItem, Component? component = null) {
             BacklogItem = backlogItem;
             Component = component ?? Component.None;

@@ -7,7 +7,7 @@ namespace Domain {
         
         public string Name { get; } = name;
         public IReadOnlyList<Skill> Skills => skills;
-        public WorkItem WorkItem { get; private set; } = new WorkItem(new BacklogItem(""), Component.None);
+        public WorkItem WorkItem { get; private set; } = WorkItem.None;
         public bool IsWorking => WorkItem.Component != Component.None;
 
         public void Learn(Skill skill) {
@@ -21,7 +21,7 @@ namespace Domain {
         }
 
         public void DoNothing() {
-            WorkOn(BacklogItem.None);
+            WorkItem = WorkItem.None;
         }
 
         public bool HasSkillsFor(BacklogItem backlogItem) {
