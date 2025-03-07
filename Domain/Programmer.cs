@@ -1,17 +1,21 @@
+using System.Collections.Generic;
+
 namespace Domain {
     public class Programmer(string name)
     {
+        private readonly List<Skill> skills = [];
+        
         public string Name { get; } = name;
-        public List<Skill> Skills { get; } = [];
+        public IReadOnlyList<Skill> Skills => skills;
         public WorkItem WorkItem { get; private set; } = new WorkItem(new BacklogItem(""), Component.None);
         public bool IsWorking => WorkItem.Component != Component.None;
 
         public void Learn(Skill skill) {
-            Skills.Add(skill);
+            skills.Add(skill);
         }
 
         public void WorkOn(BacklogItem backlogItem) {
-            var componentToWork = backlogItem.FindComponentFor(Skills);
+            var componentToWork = backlogItem.FindComponentFor(skills);
             backlogItem.StartWorkingOn(componentToWork);
             WorkItem = new WorkItem(backlogItem, componentToWork);
         }
@@ -21,7 +25,7 @@ namespace Domain {
         }
 
         public bool HasSkillsFor(BacklogItem backlogItem) {
-            return Skills
+            return skills
                .Select(backlogItem.FindComponentFor)
                .Any(componentToWork => componentToWork != Component.None);
         }
